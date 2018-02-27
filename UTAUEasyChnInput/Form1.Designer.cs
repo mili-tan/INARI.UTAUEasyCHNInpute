@@ -37,6 +37,8 @@
             // 
             // listBoxWord
             // 
+            this.listBoxWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxWord.FormattingEnabled = true;
             this.listBoxWord.ItemHeight = 15;
             this.listBoxWord.Location = new System.Drawing.Point(13, 13);
@@ -47,6 +49,9 @@
             // 
             // textBoxLyrics
             // 
+            this.textBoxLyrics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxLyrics.Location = new System.Drawing.Point(142, 13);
             this.textBoxLyrics.Multiline = true;
             this.textBoxLyrics.Name = "textBoxLyrics";
@@ -55,6 +60,7 @@
             // 
             // buttonSave
             // 
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSave.Location = new System.Drawing.Point(12, 163);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(124, 26);
@@ -64,6 +70,7 @@
             // 
             // buttonOK
             // 
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.Location = new System.Drawing.Point(527, 163);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(122, 26);
@@ -74,6 +81,8 @@
             // 
             // listBoxTone
             // 
+            this.listBoxTone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxTone.FormattingEnabled = true;
             this.listBoxTone.ItemHeight = 15;
             this.listBoxTone.Location = new System.Drawing.Point(528, 13);
