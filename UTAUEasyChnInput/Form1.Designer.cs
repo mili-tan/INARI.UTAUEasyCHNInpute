@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox = new System.Windows.Forms.ListBox();
+            this.listBoxWord = new System.Windows.Forms.ListBox();
             this.textBoxLyrics = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
+            this.listBoxTone = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // listBox
+            // listBoxWord
             // 
-            this.listBox.FormattingEnabled = true;
-            this.listBox.ItemHeight = 15;
-            this.listBox.Location = new System.Drawing.Point(13, 13);
-            this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(122, 139);
-            this.listBox.TabIndex = 0;
+            this.listBoxWord.FormattingEnabled = true;
+            this.listBoxWord.ItemHeight = 15;
+            this.listBoxWord.Location = new System.Drawing.Point(13, 13);
+            this.listBoxWord.Name = "listBoxWord";
+            this.listBoxWord.Size = new System.Drawing.Size(123, 139);
+            this.listBoxWord.TabIndex = 0;
+            this.listBoxWord.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBox_MouseDoubleClick);
             // 
             // textBoxLyrics
             // 
@@ -53,16 +55,16 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(13, 159);
+            this.buttonSave.Location = new System.Drawing.Point(12, 163);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(122, 26);
+            this.buttonSave.Size = new System.Drawing.Size(124, 26);
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "保存";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(399, 158);
+            this.buttonOK.Location = new System.Drawing.Point(527, 163);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(122, 26);
             this.buttonOK.TabIndex = 3;
@@ -70,17 +72,27 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
             // 
+            // listBoxTone
+            // 
+            this.listBoxTone.FormattingEnabled = true;
+            this.listBoxTone.ItemHeight = 15;
+            this.listBoxTone.Location = new System.Drawing.Point(528, 13);
+            this.listBoxTone.Name = "listBoxTone";
+            this.listBoxTone.Size = new System.Drawing.Size(120, 139);
+            this.listBoxTone.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 193);
+            this.ClientSize = new System.Drawing.Size(657, 198);
+            this.Controls.Add(this.listBoxTone);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxLyrics);
-            this.Controls.Add(this.listBox);
+            this.Controls.Add(this.listBoxWord);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "UTAUEasyChnInput";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -89,10 +101,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox;
+        private System.Windows.Forms.ListBox listBoxWord;
         private System.Windows.Forms.TextBox textBoxLyrics;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.ListBox listBoxTone;
     }
 }
 
