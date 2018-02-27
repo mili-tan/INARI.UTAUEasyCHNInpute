@@ -57,6 +57,7 @@
             this.textBoxLyrics.Name = "textBoxLyrics";
             this.textBoxLyrics.Size = new System.Drawing.Size(379, 139);
             this.textBoxLyrics.TabIndex = 1;
+            this.textBoxLyrics.TextChanged += new System.EventHandler(this.textBoxLyrics_TextChanged);
             // 
             // buttonSave
             // 
@@ -71,7 +72,7 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(527, 163);
+            this.buttonOK.Location = new System.Drawing.Point(526, 163);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(122, 26);
             this.buttonOK.TabIndex = 3;

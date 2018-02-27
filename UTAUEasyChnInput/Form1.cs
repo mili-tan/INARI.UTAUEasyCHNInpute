@@ -63,5 +63,10 @@ namespace UTAUEasyChnInput
                     break;
                 }
         }
+
+        private void textBoxLyrics_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
