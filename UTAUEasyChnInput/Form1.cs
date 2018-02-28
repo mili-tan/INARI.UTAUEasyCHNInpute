@@ -24,12 +24,11 @@ namespace UTAUEasyChnInput
             textBoxLyrics.Text.Replace(" ","");
             foreach (char itemWords in textBoxLyrics.Text)
             {
-                string pinyinStr = new ChineseChar(itemWords).Pinyins[0].ToString();
-                listBoxWord.Items.Add(Regex.Replace(pinyinStr, @"\d", "").ToLower());
+                listBoxWord.Items.Add(Regex.Replace(new ChineseChar(itemWords).Pinyins[0].ToString(), @"\d", "").ToLower());
             }
         }
 
-        private void ListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ListBoxWord_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             var myLyricsChars = textBoxLyrics.Text.ToCharArray();
             string myLyricsWordStr = myLyricsChars[listBoxWord.SelectedIndex].ToString();
@@ -56,17 +55,20 @@ namespace UTAUEasyChnInput
                     int newCount = i++;
 
                     for (; i < count; i++)
+                    {
                         if (list[i] != null)
+                        {
                             list[newCount++] = list[i];
-
+                        }
+                    }
                     list.RemoveRange(newCount, count - newCount);
                     break;
                 }
         }
 
-        private void textBoxLyrics_TextChanged(object sender, EventArgs e)
+        private void ListBoxTone_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            listBoxWord.Items[listBoxWord.SelectedIndex] = Regex.Replace(listBoxTone.SelectedItem.ToString(), @"\d", "").ToLower();
         }
     }
 }

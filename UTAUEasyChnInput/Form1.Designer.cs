@@ -45,7 +45,7 @@
             this.listBoxWord.Name = "listBoxWord";
             this.listBoxWord.Size = new System.Drawing.Size(123, 139);
             this.listBoxWord.TabIndex = 0;
-            this.listBoxWord.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBox_MouseDoubleClick);
+            this.listBoxWord.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxWord_MouseDoubleClick);
             // 
             // textBoxLyrics
             // 
@@ -57,7 +57,6 @@
             this.textBoxLyrics.Name = "textBoxLyrics";
             this.textBoxLyrics.Size = new System.Drawing.Size(379, 139);
             this.textBoxLyrics.TabIndex = 1;
-            this.textBoxLyrics.TextChanged += new System.EventHandler(this.textBoxLyrics_TextChanged);
             // 
             // buttonSave
             // 
@@ -90,6 +89,7 @@
             this.listBoxTone.Name = "listBoxTone";
             this.listBoxTone.Size = new System.Drawing.Size(120, 139);
             this.listBoxTone.TabIndex = 4;
+            this.listBoxTone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxTone_MouseDoubleClick);
             // 
             // Form1
             // 
