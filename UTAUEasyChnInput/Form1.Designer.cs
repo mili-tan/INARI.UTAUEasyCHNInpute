@@ -33,6 +33,8 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.listBoxTone = new System.Windows.Forms.ListBox();
+            this.nPinyinR = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // listBoxWord
@@ -91,11 +93,36 @@
             this.listBoxTone.TabIndex = 4;
             this.listBoxTone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxTone_MouseDoubleClick);
             // 
+            // nPinyinR
+            // 
+            this.nPinyinR.AutoSize = true;
+            this.nPinyinR.Location = new System.Drawing.Point(142, 167);
+            this.nPinyinR.Name = "nPinyinR";
+            this.nPinyinR.Size = new System.Drawing.Size(84, 19);
+            this.nPinyinR.TabIndex = 5;
+            this.nPinyinR.TabStop = true;
+            this.nPinyinR.Text = "NPinyin";
+            this.nPinyinR.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(405, 167);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(116, 19);
+            this.radioButton1.TabIndex = 6;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "MSIntPinyin";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 198);
+            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.nPinyinR);
             this.Controls.Add(this.listBoxTone);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonSave);
@@ -116,6 +143,8 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.ListBox listBoxTone;
+        private System.Windows.Forms.RadioButton nPinyinR;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 

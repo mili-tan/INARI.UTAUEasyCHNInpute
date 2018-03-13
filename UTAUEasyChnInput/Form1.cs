@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.International.Converters.PinYinConverter;
+using NPinyin;
 
 namespace UTAUEasyChnInput
 {
@@ -22,9 +23,19 @@ namespace UTAUEasyChnInput
         {
             listBoxWord.Items.Clear();
             textBoxLyrics.Text.Replace(" ","");
-            foreach (char itemWords in textBoxLyrics.Text)
+            if (nPinyinR.Checked)
             {
-                listBoxWord.Items.Add(Regex.Replace(new ChineseChar(itemWords).Pinyins[0].ToString(), @"\d", "").ToLower());
+                foreach (char itemWords in textBoxLyrics.Text)
+                {
+                    listBoxWord.Items.Add(Regex.Replace(Pinyin.GetPinyin(itemWords), @"\d", "").ToLower());
+                }
+            }
+            else
+            {
+                foreach (char itemWords in textBoxLyrics.Text)
+                {
+                    listBoxWord.Items.Add(Regex.Replace(new ChineseChar(itemWords).Pinyins[0].ToString(), @"\d", "").ToLower());
+                }
             }
         }
 
