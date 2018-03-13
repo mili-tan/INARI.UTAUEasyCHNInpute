@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using IniParser;
+using IniParser.Model;
 using Microsoft.International.Converters.PinYinConverter;
 using NPinyin;
 
@@ -9,6 +13,40 @@ namespace UTAUEasyChnInput
 {
     public partial class Form1 : Form
     {
+        public Form1(string ustPath)
+        {
+            InitializeComponent();
+
+            try
+            {
+                string str = File.ReadAllText(ustPath).Replace("UST Version 1.20", "");
+
+                IniData inidata = new FileIniDataParser().Parser.Parse(str);
+                int startPoint = Convert.ToInt32(inidata.Sections.ElementAt(4).SectionName.Replace("#", ""));
+                int mPointCount = inidata.Sections.Count - 2;
+
+                if (inidata["#PREV"].Count != 0)
+                {
+                    mPointCount -= 1;
+                }
+                else
+                {
+                    startPoint = 1;
+                }
+
+                if (inidata["#NEXT"].Count != 0)
+                {
+                    mPointCount -= 1;
+                }
+
+                Text = "起始点：" + startPoint + " 音符数：" + mPointCount;
+            }
+            catch (Exception msg)
+            {
+                MessageBox.Show(msg.Message);
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();

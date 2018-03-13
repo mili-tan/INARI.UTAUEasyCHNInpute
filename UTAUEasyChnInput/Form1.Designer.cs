@@ -67,7 +67,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(124, 26);
             this.buttonSave.TabIndex = 2;
-            this.buttonSave.Text = "保存";
+            this.buttonSave.Text = "应用";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
             // buttonOK
