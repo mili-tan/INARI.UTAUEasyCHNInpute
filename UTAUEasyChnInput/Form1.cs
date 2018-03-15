@@ -17,6 +17,8 @@ namespace UTAUEasyChnInput
         public int PointCount = 0;
         public IniData UstData;
         string savePath;
+        string UstHeader = "[#VERSION]\r\n" +
+            "UST Version 1.20\r\n\r\n";
 
         public Form1(string ustPath)
         {
@@ -141,7 +143,6 @@ namespace UTAUEasyChnInput
 
         private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            UstData["#VERSION"]["UST Version 1.20"] = "####RMTHIS####";
             try
             {
                 for (int i = 0; i < PointCount; i++)
@@ -149,12 +150,13 @@ namespace UTAUEasyChnInput
                     int pointNum = i + StartPoint;
                     UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
                 }
+                File.WriteAllText(savePath, UstHeader + UstData.ToString());
             }
+
             catch (Exception msg)
             {
                 MessageBox.Show(msg.Message);
             }
-            File.WriteAllText(savePath, UstData.ToString().Replace("= ####RMTHIS####", ""));
         }
 
         private void SaveBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
