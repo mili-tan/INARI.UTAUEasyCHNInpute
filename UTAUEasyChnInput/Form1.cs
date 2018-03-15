@@ -28,7 +28,7 @@ namespace UTAUEasyChnInput
                 string ustFileStr = File.ReadAllText(ustPath).Replace("UST Version 1.20", "");
 
                 UstData = new FileIniDataParser().Parser.Parse(ustFileStr);
-                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(4).SectionName.Replace("#", ""));
+                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(3).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count - 2;
 
                 if (UstData["#PREV"].Count != 0)
@@ -141,12 +141,20 @@ namespace UTAUEasyChnInput
 
         private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            for (int i = 0; i < PointCount -1; i++)
+            UstData["#VERSION"]["UST Version 1.20"] = "####RMTHIS####";
+            try
             {
-                int pointNum = i + StartPoint;
-                UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
-                File.WriteAllText(savePath, UstData.ToString());
+                for (int i = 0; i < PointCount - 1; i++)
+                {
+                    int pointNum = i + StartPoint;
+                    UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
+                }
             }
+            catch (Exception msg)
+            {
+                MessageBox.Show(msg.Message);
+            }
+            File.WriteAllText(savePath, UstData.ToString().Replace("= ####RMTHIS####", ""));
         }
 
         private void SaveBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
