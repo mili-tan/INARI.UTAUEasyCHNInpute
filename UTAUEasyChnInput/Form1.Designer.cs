@@ -35,6 +35,7 @@
             this.listBoxTone = new System.Windows.Forms.ListBox();
             this.nPinyinR = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.SaveBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // listBoxWord
@@ -69,6 +70,7 @@
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "应用";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonOK
             // 
@@ -116,6 +118,12 @@
             this.radioButton1.Text = "MSIntPinyin";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
+            // SaveBackgroundWorker
+            // 
+            this.SaveBackgroundWorker.WorkerReportsProgress = true;
+            this.SaveBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.SaveBackgroundWorker_DoWork);
+            this.SaveBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SaveBackgroundWorker_RunWorkerCompleted);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -145,6 +153,7 @@
         private System.Windows.Forms.ListBox listBoxTone;
         private System.Windows.Forms.RadioButton nPinyinR;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.ComponentModel.BackgroundWorker SaveBackgroundWorker;
     }
 }
 

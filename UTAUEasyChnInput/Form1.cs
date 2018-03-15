@@ -13,33 +13,47 @@ namespace UTAUEasyChnInput
 {
     public partial class Form1 : Form
     {
+        public int StartPoint = 0;
+        public int PointCount = 0;
+        public IniData UstData;
+        string savePath;
+
         public Form1(string ustPath)
         {
             InitializeComponent();
+            savePath = ustPath;
 
             try
             {
-                string str = File.ReadAllText(ustPath).Replace("UST Version 1.20", "");
+                string ustFileStr = File.ReadAllText(ustPath).Replace("UST Version 1.20", "");
 
-                IniData inidata = new FileIniDataParser().Parser.Parse(str);
-                int startPoint = Convert.ToInt32(inidata.Sections.ElementAt(4).SectionName.Replace("#", ""));
-                int mPointCount = inidata.Sections.Count - 2;
+                UstData = new FileIniDataParser().Parser.Parse(ustFileStr);
+                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(4).SectionName.Replace("#", ""));
+                PointCount = UstData.Sections.Count - 2;
 
-                if (inidata["#PREV"].Count != 0)
+                if (UstData["#PREV"].Count != 0)
                 {
-                    mPointCount -= 1;
+                    PointCount -= 1;
                 }
                 else
                 {
-                    startPoint = 1;
+                    StartPoint = 1;
                 }
-
-                if (inidata["#NEXT"].Count != 0)
+                if (UstData["#NEXT"].Count != 0)
                 {
-                    mPointCount -= 1;
+                    PointCount -= 1;
                 }
 
-                Text = "起始点：" + startPoint + " 音符数：" + mPointCount;
+                Text = "起始点：" + StartPoint + " 音符数：" + PointCount;
+
+                List<string> lyricWordList = new List<string>();
+                for (int i = 0; i < PointCount - 1; i++)
+                {
+                    int pointNum = i + StartPoint;
+                    
+                    lyricWordList.Add(UstData["#" + pointNum.ToString("0000")]["Lyric"]);
+                }
+                listBoxWord.Items.AddRange(lyricWordList.ToArray());
             }
             catch (Exception msg)
             {
@@ -54,7 +68,7 @@ namespace UTAUEasyChnInput
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
@@ -118,6 +132,26 @@ namespace UTAUEasyChnInput
         private void ListBoxTone_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             listBoxWord.Items[listBoxWord.SelectedIndex] = Regex.Replace(listBoxTone.SelectedItem.ToString(), @"\d", "").ToLower();
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            SaveBackgroundWorker.RunWorkerAsync();
+        }
+
+        private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            for (int i = 0; i < PointCount -1; i++)
+            {
+                int pointNum = i + StartPoint;
+                UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
+                File.WriteAllText(savePath, UstData.ToString());
+            }
+        }
+
+        private void SaveBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            Close();
         }
     }
 }
