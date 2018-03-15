@@ -25,11 +25,11 @@ namespace UTAUEasyChnInput
 
             try
             {
-                string ustFileStr = File.ReadAllText(ustPath).Replace("UST Version 1.20", "");
+                string ustFileStr = File.ReadAllText(ustPath).Replace("UST Version 1.20", "").Replace("[#VERSION]", "");
 
                 UstData = new FileIniDataParser().Parser.Parse(ustFileStr);
-                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(3).SectionName.Replace("#", ""));
-                PointCount = UstData.Sections.Count - 2;
+                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(2).SectionName.Replace("#", ""));
+                PointCount = UstData.Sections.Count -1;
 
                 if (UstData["#PREV"].Count != 0)
                 {
@@ -47,7 +47,7 @@ namespace UTAUEasyChnInput
                 Text = "起始点：" + StartPoint + " 音符数：" + PointCount;
 
                 List<string> lyricWordList = new List<string>();
-                for (int i = 0; i < PointCount - 1; i++)
+                for (int i = 0; i < PointCount; i++)
                 {
                     int pointNum = i + StartPoint;
                     
@@ -144,7 +144,7 @@ namespace UTAUEasyChnInput
             UstData["#VERSION"]["UST Version 1.20"] = "####RMTHIS####";
             try
             {
-                for (int i = 0; i < PointCount - 1; i++)
+                for (int i = 0; i < PointCount; i++)
                 {
                     int pointNum = i + StartPoint;
                     UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
