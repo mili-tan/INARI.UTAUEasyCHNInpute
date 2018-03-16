@@ -146,6 +146,10 @@ namespace UTAUEasyChnInput
                     int pointNum = i + StartPoint;
                     UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
                 }
+
+                UstData.Sections.RemoveSection("#PREV");
+                UstData.Sections.RemoveSection("#NEXT");
+
                 File.WriteAllText(savePath, UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
             }
 
