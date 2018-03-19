@@ -117,7 +117,6 @@ namespace UTAUEasyChnInput
             {
                 MessageBox.Show("这不是一个多音字");
             }
-            textBoxLyrics.Text = listBoxWord.SelectedItem.ToString();
         }
 
         private static void RemoveNullElement<T>(List<T> list)
