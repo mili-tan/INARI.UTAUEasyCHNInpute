@@ -28,7 +28,10 @@ namespace UTAUEasyChnInput
 
             try
             {
-                string ustFileStr = File.ReadAllText(ustPath, EncodeJPN).Replace("UST Version 1.20", "").Replace("[#VERSION]", "");
+                string ustFileStr = File.ReadAllText(ustPath, EncodeJPN)
+                    .Replace("UST Version 1.20", "")
+                    .Replace("[#VERSION]", "")
+                    .Replace("､｢", "あ");
 
                 UstData = new FileIniDataParser().Parser.Parse(ustFileStr);
 
@@ -114,6 +117,7 @@ namespace UTAUEasyChnInput
             {
                 MessageBox.Show("这不是一个多音字");
             }
+            textBoxLyrics.Text = listBoxWord.SelectedItem.ToString();
         }
 
         private static void RemoveNullElement<T>(List<T> list)
