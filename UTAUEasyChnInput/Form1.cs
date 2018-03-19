@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using IniParser;
@@ -16,9 +17,9 @@ namespace UTAUEasyChnInput
         public int StartPoint = 0;
         public int PointCount = 0;
         public IniData UstData;
+        private readonly Encoding EncodeJPN = Encoding.GetEncoding("Shift_JIS");
         string savePath;
-        string UstHeader = "[#VERSION]\r\n" +
-            "UST Version 1.20\r\n";
+        string UstHeader = "[#VERSION]\r\n" + "UST Version 1.20\r\n";
 
         public Form1(string ustPath)
         {
@@ -27,7 +28,7 @@ namespace UTAUEasyChnInput
 
             try
             {
-                string ustFileStr = File.ReadAllText(ustPath).Replace("UST Version 1.20", "").Replace("[#VERSION]", "");
+                string ustFileStr = File.ReadAllText(ustPath, EncodeJPN).Replace("UST Version 1.20", "").Replace("[#VERSION]", "");
 
                 UstData = new FileIniDataParser().Parser.Parse(ustFileStr);
 
