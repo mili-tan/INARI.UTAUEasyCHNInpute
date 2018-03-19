@@ -138,7 +138,12 @@ namespace UTAUEasyChnInput
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            //SaveBackgroundWorker.RunWorkerAsync();
+            SaveBackgroundWorker.RunWorkerAsync();
+
+        }
+
+        private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
             try
             {
                 for (int i = 0; i < PointCount; i++)
@@ -157,17 +162,12 @@ namespace UTAUEasyChnInput
             {
                 MessageBox.Show(msg.Message);
             }
-            MessageBox.Show("OK!");
-            Close();
-        }
 
-        private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            //moved
         }
 
         private void SaveBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+            MessageBox.Show("OK!");
             Close();
         }
     }
