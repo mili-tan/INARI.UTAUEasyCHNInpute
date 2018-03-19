@@ -30,21 +30,25 @@ namespace UTAUEasyChnInput
                 string ustFileStr = File.ReadAllText(ustPath).Replace("UST Version 1.20", "").Replace("[#VERSION]", "");
 
                 UstData = new FileIniDataParser().Parser.Parse(ustFileStr);
-                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(2).SectionName.Replace("#", ""));
+
+                UstData.Sections.RemoveSection("#PREV");
+                UstData.Sections.RemoveSection("#NEXT");
+
+                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(1).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count -1;
 
-                if (UstData["#PREV"].Count != 0)
-                {
-                    PointCount -= 1;
-                }
-                else
-                {
-                    StartPoint = 1;
-                }
-                if (UstData["#NEXT"].Count != 0)
-                {
-                    PointCount -= 1;
-                }
+                //if (UstData["#PREV"].Count != 0)
+                //{
+                //    PointCount -= 1;
+                //}
+                //else
+                //{
+                //    StartPoint = 1;
+                //}
+                //if (UstData["#NEXT"].Count != 0)
+                //{
+                //    PointCount -= 1;
+                //}
 
                 Text = "起始点：" + StartPoint + " 音符数：" + PointCount;
 
@@ -151,9 +155,6 @@ namespace UTAUEasyChnInput
                     int pointNum = i + StartPoint;
                     UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
                 }
-
-                UstData.Sections.RemoveSection("#PREV");
-                UstData.Sections.RemoveSection("#NEXT");
 
                 File.WriteAllText(savePath, UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
             }
