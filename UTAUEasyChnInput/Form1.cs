@@ -17,9 +17,9 @@ namespace UTAUEasyChnInput
         public int StartPoint = 0;
         public int PointCount = 0;
         public IniData UstData;
+        public string savePath;
         private readonly Encoding EncodeJPN = Encoding.GetEncoding("Shift_JIS");
-        string savePath;
-        string UstHeader = "[#VERSION]\r\n" + "UST Version 1.20\r\n";
+        private readonly string UstHeader = "[#VERSION]\r\n" + "UST Version 1.20\r\n";
 
         public Form1(string ustPath)
         {
@@ -31,6 +31,7 @@ namespace UTAUEasyChnInput
                 string ustFileStr = File.ReadAllText(ustPath, EncodeJPN)
                     .Replace("UST Version 1.20", "")
                     .Replace("[#VERSION]", "")
+                    .Replace(UstHeader, "")
                     .Replace("､｢", "あ");
 
                 UstData = new FileIniDataParser().Parser.Parse(ustFileStr);
@@ -40,19 +41,6 @@ namespace UTAUEasyChnInput
 
                 StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(1).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count -1;
-
-                //if (UstData["#PREV"].Count != 0)
-                //{
-                //    PointCount -= 1;
-                //}
-                //else
-                //{
-                //    StartPoint = 1;
-                //}
-                //if (UstData["#NEXT"].Count != 0)
-                //{
-                //    PointCount -= 1;
-                //}
 
                 Text = "起始点：" + StartPoint + " 音符数：" + PointCount;
 
@@ -87,7 +75,7 @@ namespace UTAUEasyChnInput
             textBoxLyrics.Text.Replace(" ","");
             if (nPinyinR.Checked)
             {
-                foreach (char itemWords in textBoxLyrics.Text)
+                foreach (char itemWords in textBoxLyrics.Text.Replace("\n","").Replace("\r",""))
                 {
                     listBoxWord.Items.Add(Regex.Replace(Pinyin.GetPinyin(itemWords), @"\d", "").ToLower());
                 }

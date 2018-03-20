@@ -26,7 +26,6 @@ namespace UTAUEasyChnInput
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 MessageBox.Show("没有包含应有的参数，请作为UTAU插件使用");
-                Application.Run(new Form1("tmp466A.tmp"));
             }
         }
     }
