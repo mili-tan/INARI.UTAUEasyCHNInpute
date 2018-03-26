@@ -72,17 +72,21 @@ namespace UTAUEasyChnInput
         private void ButtonOK_Click(object sender, EventArgs e)
         {
             listBoxWord.Items.Clear();
-            textBoxLyrics.Text.Replace(" ","");
+
+            textBoxLyrics.Text = textBoxLyrics.Text.Replace(" ","");
+            textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, "\\p{P}", "");
+            textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, "^[A-Za-z]+$", "");
+
             if (nPinyinR.Checked)
             {
-                foreach (char itemWords in textBoxLyrics.Text.Replace("\n","").Replace("\r",""))
+                foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
                 {
                     listBoxWord.Items.Add(Regex.Replace(Pinyin.GetPinyin(itemWords), @"\d", "").ToLower());
                 }
             }
             else
             {
-                foreach (char itemWords in textBoxLyrics.Text)
+                foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
                 {
                     listBoxWord.Items.Add(Regex.Replace(new ChineseChar(itemWords).Pinyins[0].ToString(), @"\d", "").ToLower());
                 }
