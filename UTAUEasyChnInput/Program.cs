@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace UTAUEasyChnInput
@@ -26,7 +24,10 @@ namespace UTAUEasyChnInput
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 MessageBox.Show("没有包含应有的参数，请作为UTAU插件使用");
-                Application.Run(new Form1());
+                if (File.Exists("test"))
+                {
+                    Application.Run(new Form1());
+                }
 
             }
         }
