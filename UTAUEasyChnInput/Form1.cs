@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using IniParser;
 using IniParser.Model;
 using Microsoft.International.Converters.PinYinConverter;
+using System.Drawing;
 using NPinyin;
 
 namespace UTAUEasyChnInput
@@ -66,7 +67,7 @@ namespace UTAUEasyChnInput
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
