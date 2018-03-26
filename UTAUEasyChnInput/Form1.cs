@@ -65,7 +65,7 @@ namespace UTAUEasyChnInput
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
@@ -74,22 +74,20 @@ namespace UTAUEasyChnInput
 
             textBoxLyrics.Text = textBoxLyrics.Text.Replace(" ","");
             textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, "\\p{P}", "");
-            textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, "^[A-Za-z]+$", "");
+            textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, @"[A-Za-z0-9]", "");
 
-            if (nPinyinR.Checked)
+            foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
             {
-                foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
+                if (nPinyinR.Checked)
                 {
                     listBoxWord.Items.Add(Regex.Replace(Pinyin.GetPinyin(itemWords), @"\d", "").ToLower());
                 }
-            }
-            else
-            {
-                foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
+                else
                 {
                     listBoxWord.Items.Add(Regex.Replace(new ChineseChar(itemWords).Pinyins[0].ToString(), @"\d", "").ToLower());
                 }
             }
+
         }
 
         private void ListBoxWord_MouseDoubleClick(object sender, MouseEventArgs e)
