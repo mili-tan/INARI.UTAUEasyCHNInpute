@@ -30,8 +30,6 @@ namespace UTAUEasyChnInput
             try
             {
                 string ustFileStr = File.ReadAllText(ustPath, EncodeJPN)
-                    .Replace("UST Version 1.20", "")
-                    .Replace("[#VERSION]", "")
                     .Replace(UstHeader, "")
                     .Replace("､｢", "あ");
 
@@ -96,7 +94,7 @@ namespace UTAUEasyChnInput
 
         private void ListBoxWord_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var myLyricsChars = textBoxLyrics.Text.ToCharArray();
+            var myLyricsChars = textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", "").ToCharArray();
             string myLyricsWordStr = myLyricsChars[listBoxWord.SelectedIndex].ToString();
             if (new ChineseChar(Convert.ToChar(myLyricsWordStr)).IsPolyphone)
             {

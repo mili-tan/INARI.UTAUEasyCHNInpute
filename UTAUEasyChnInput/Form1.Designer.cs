@@ -42,11 +42,12 @@
             // 
             this.listBoxWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxWord.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.listBoxWord.FormattingEnabled = true;
-            this.listBoxWord.ItemHeight = 15;
-            this.listBoxWord.Location = new System.Drawing.Point(13, 13);
+            this.listBoxWord.ItemHeight = 20;
+            this.listBoxWord.Location = new System.Drawing.Point(13, 9);
             this.listBoxWord.Name = "listBoxWord";
-            this.listBoxWord.Size = new System.Drawing.Size(123, 139);
+            this.listBoxWord.Size = new System.Drawing.Size(123, 144);
             this.listBoxWord.TabIndex = 0;
             this.listBoxWord.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxWord_MouseDoubleClick);
             // 
@@ -55,18 +56,20 @@
             this.textBoxLyrics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLyrics.Location = new System.Drawing.Point(142, 13);
+            this.textBoxLyrics.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxLyrics.Location = new System.Drawing.Point(142, 9);
             this.textBoxLyrics.Multiline = true;
             this.textBoxLyrics.Name = "textBoxLyrics";
-            this.textBoxLyrics.Size = new System.Drawing.Size(379, 139);
+            this.textBoxLyrics.Size = new System.Drawing.Size(379, 144);
             this.textBoxLyrics.TabIndex = 1;
             // 
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSave.Location = new System.Drawing.Point(12, 163);
+            this.buttonSave.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.buttonSave.Location = new System.Drawing.Point(12, 159);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(124, 26);
+            this.buttonSave.Size = new System.Drawing.Size(124, 28);
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "应用";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -75,9 +78,10 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(526, 163);
+            this.buttonOK.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.buttonOK.Location = new System.Drawing.Point(526, 159);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(122, 26);
+            this.buttonOK.Size = new System.Drawing.Size(122, 28);
             this.buttonOK.TabIndex = 3;
             this.buttonOK.Text = "确定";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -87,20 +91,23 @@
             // 
             this.listBoxTone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxTone.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.listBoxTone.FormattingEnabled = true;
-            this.listBoxTone.ItemHeight = 15;
-            this.listBoxTone.Location = new System.Drawing.Point(528, 13);
+            this.listBoxTone.ItemHeight = 20;
+            this.listBoxTone.Location = new System.Drawing.Point(528, 9);
             this.listBoxTone.Name = "listBoxTone";
-            this.listBoxTone.Size = new System.Drawing.Size(120, 139);
+            this.listBoxTone.Size = new System.Drawing.Size(120, 144);
             this.listBoxTone.TabIndex = 4;
             this.listBoxTone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxTone_MouseDoubleClick);
             // 
             // nPinyinR
             // 
+            this.nPinyinR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nPinyinR.AutoSize = true;
-            this.nPinyinR.Location = new System.Drawing.Point(142, 167);
+            this.nPinyinR.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.nPinyinR.Location = new System.Drawing.Point(142, 161);
             this.nPinyinR.Name = "nPinyinR";
-            this.nPinyinR.Size = new System.Drawing.Size(84, 19);
+            this.nPinyinR.Size = new System.Drawing.Size(85, 24);
             this.nPinyinR.TabIndex = 5;
             this.nPinyinR.TabStop = true;
             this.nPinyinR.Text = "NPinyin";
@@ -108,14 +115,18 @@
             // 
             // radioButton1
             // 
+            this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton1.AutoSize = true;
+            this.radioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(405, 167);
+            this.radioButton1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.radioButton1.Location = new System.Drawing.Point(405, 161);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(116, 19);
+            this.radioButton1.Size = new System.Drawing.Size(116, 24);
             this.radioButton1.TabIndex = 6;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "MSIntPinyin";
+            this.radioButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // SaveBackgroundWorker
@@ -137,6 +148,7 @@
             this.Controls.Add(this.textBoxLyrics);
             this.Controls.Add(this.listBoxWord);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UTAUEasyChnInput";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
