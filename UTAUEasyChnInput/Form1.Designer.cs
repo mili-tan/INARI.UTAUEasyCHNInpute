@@ -36,6 +36,7 @@
             this.nPinyinR = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.SaveBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.textBoxTone = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listBoxWord
@@ -60,6 +61,7 @@
             this.textBoxLyrics.Location = new System.Drawing.Point(142, 9);
             this.textBoxLyrics.Multiline = true;
             this.textBoxLyrics.Name = "textBoxLyrics";
+            this.textBoxLyrics.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxLyrics.Size = new System.Drawing.Size(379, 144);
             this.textBoxLyrics.TabIndex = 1;
             // 
@@ -91,12 +93,13 @@
             // 
             this.listBoxTone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxTone.Enabled = false;
             this.listBoxTone.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.listBoxTone.FormattingEnabled = true;
             this.listBoxTone.ItemHeight = 20;
-            this.listBoxTone.Location = new System.Drawing.Point(528, 9);
+            this.listBoxTone.Location = new System.Drawing.Point(528, 29);
             this.listBoxTone.Name = "listBoxTone";
-            this.listBoxTone.Size = new System.Drawing.Size(120, 144);
+            this.listBoxTone.Size = new System.Drawing.Size(120, 124);
             this.listBoxTone.TabIndex = 4;
             this.listBoxTone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxTone_MouseDoubleClick);
             // 
@@ -135,11 +138,24 @@
             this.SaveBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.SaveBackgroundWorker_DoWork);
             this.SaveBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SaveBackgroundWorker_RunWorkerCompleted);
             // 
+            // textBoxTone
+            // 
+            this.textBoxTone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxTone.Enabled = false;
+            this.textBoxTone.Font = new System.Drawing.Font("Microsoft YaHei UI", 7F);
+            this.textBoxTone.Location = new System.Drawing.Point(528, 9);
+            this.textBoxTone.Name = "textBoxTone";
+            this.textBoxTone.Size = new System.Drawing.Size(120, 22);
+            this.textBoxTone.TabIndex = 7;
+            this.textBoxTone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxTone_KeyDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 198);
+            this.Controls.Add(this.textBoxTone);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.nPinyinR);
             this.Controls.Add(this.listBoxTone);
@@ -166,6 +182,7 @@
         private System.Windows.Forms.RadioButton nPinyinR;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.ComponentModel.BackgroundWorker SaveBackgroundWorker;
+        private System.Windows.Forms.TextBox textBoxTone;
     }
 }
 

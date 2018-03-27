@@ -94,11 +94,18 @@ namespace UTAUEasyChnInput
         {
             var myLyricsChars = textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", "").ToCharArray();
             string myLyricsWordStr = myLyricsChars[listBoxWord.SelectedIndex].ToString();
+
+            textBoxTone.Enabled = true;
+
             if (new ChineseChar(Convert.ToChar(myLyricsWordStr)).IsPolyphone)
             {
+                listBoxTone.Enabled = true;
+
                 var pinyinListR = new ChineseChar(Convert.ToChar(myLyricsWordStr)).Pinyins;
                 var pinyinList = new List<string>(pinyinListR);
+
                 RemoveNullElement(pinyinList);
+
                 listBoxTone.Items.Clear();
                 listBoxTone.Items.AddRange(pinyinList.ToArray());
             }
@@ -163,6 +170,15 @@ namespace UTAUEasyChnInput
         {
             MessageBox.Show("OK!");
             Close();
+        }
+
+        private void TextBoxTone_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                listBoxWord.Items[listBoxWord.SelectedIndex] = textBoxTone.Text;
+                textBoxTone.Clear();
+            }
         }
     }
 }
