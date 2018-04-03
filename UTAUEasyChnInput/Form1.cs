@@ -89,6 +89,12 @@ namespace UTAUEasyChnInput
                 }
             }
 
+            if (checkBoxR.Checked)
+            {
+                listBoxWord.Items.Clear();
+                listBoxWord.Items.AddRange(ToPinyinR(textBoxLyrics.Text));
+            }
+
         }
 
         private void ListBoxWord_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -196,18 +202,15 @@ namespace UTAUEasyChnInput
             var pinyinList = new List<string>();
             foreach (string word in wordsLeft)
             {
-                string pinyin = "";
                 if (word.Length == 1 && !dict.Dictionary.ContainsKey(word))
                 {
-                    pinyin = ToPinyin.ByMSIntPinyin(word.ToCharArray()[0]);
+                    string pinyin = ToPinyin.ByMSIntPinyin(word.ToCharArray()[0]);
+                    pinyinList.Add(pinyin);
                 }
                 else
                 {
-                    pinyin = dict.Dictionary[word].ToLower();
+                    pinyinList.AddRange(Regex.Replace(dict.Dictionary[word].ToLower(), @"\d", "").Split(' '));
                 }
-                pinyin = Regex.Replace(pinyin, @"\d", "");
-
-                pinyinList.Add(pinyin);
             }
             return pinyinList.ToArray();
         }

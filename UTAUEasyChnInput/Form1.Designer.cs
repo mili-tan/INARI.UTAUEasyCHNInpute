@@ -155,7 +155,7 @@
             // 
             this.checkBoxR.AutoSize = true;
             this.checkBoxR.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.checkBoxR.Location = new System.Drawing.Point(249, 162);
+            this.checkBoxR.Location = new System.Drawing.Point(233, 162);
             this.checkBoxR.Name = "checkBoxR";
             this.checkBoxR.Size = new System.Drawing.Size(100, 24);
             this.checkBoxR.TabIndex = 8;

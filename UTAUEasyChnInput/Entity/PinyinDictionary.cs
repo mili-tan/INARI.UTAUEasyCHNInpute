@@ -11,7 +11,7 @@ namespace Entity
             get { return dictionary; }
         }
 
-        public PinyinDictionary() : this("Dictionary\\R-Dictionary.xml")
+        public PinyinDictionary() : this("Dictionary.xml")
         { }
 
         public PinyinDictionary(string fileName)
