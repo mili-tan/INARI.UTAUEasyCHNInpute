@@ -33,10 +33,11 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.listBoxTone = new System.Windows.Forms.ListBox();
-            this.nPinyinR = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.nPinyinRBox = new System.Windows.Forms.RadioButton();
+            this.msIntPinyinRBox = new System.Windows.Forms.RadioButton();
             this.SaveBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.textBoxTone = new System.Windows.Forms.TextBox();
+            this.checkBoxR = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // listBoxWord
@@ -103,34 +104,34 @@
             this.listBoxTone.TabIndex = 4;
             this.listBoxTone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListBoxTone_MouseDoubleClick);
             // 
-            // nPinyinR
+            // nPinyinRBox
             // 
-            this.nPinyinR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nPinyinR.AutoSize = true;
-            this.nPinyinR.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.nPinyinR.Location = new System.Drawing.Point(142, 161);
-            this.nPinyinR.Name = "nPinyinR";
-            this.nPinyinR.Size = new System.Drawing.Size(85, 24);
-            this.nPinyinR.TabIndex = 5;
-            this.nPinyinR.TabStop = true;
-            this.nPinyinR.Text = "NPinyin";
-            this.nPinyinR.UseVisualStyleBackColor = true;
+            this.nPinyinRBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nPinyinRBox.AutoSize = true;
+            this.nPinyinRBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.nPinyinRBox.Location = new System.Drawing.Point(142, 161);
+            this.nPinyinRBox.Name = "nPinyinRBox";
+            this.nPinyinRBox.Size = new System.Drawing.Size(85, 24);
+            this.nPinyinRBox.TabIndex = 5;
+            this.nPinyinRBox.TabStop = true;
+            this.nPinyinRBox.Text = "NPinyin";
+            this.nPinyinRBox.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // msIntPinyinRBox
             // 
-            this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.radioButton1.Location = new System.Drawing.Point(405, 161);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(116, 24);
-            this.radioButton1.TabIndex = 6;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "MSIntPinyin";
-            this.radioButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.msIntPinyinRBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.msIntPinyinRBox.AutoSize = true;
+            this.msIntPinyinRBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.msIntPinyinRBox.Checked = true;
+            this.msIntPinyinRBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.msIntPinyinRBox.Location = new System.Drawing.Point(405, 161);
+            this.msIntPinyinRBox.Name = "msIntPinyinRBox";
+            this.msIntPinyinRBox.Size = new System.Drawing.Size(116, 24);
+            this.msIntPinyinRBox.TabIndex = 6;
+            this.msIntPinyinRBox.TabStop = true;
+            this.msIntPinyinRBox.Text = "MSIntPinyin";
+            this.msIntPinyinRBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.msIntPinyinRBox.UseVisualStyleBackColor = true;
             // 
             // SaveBackgroundWorker
             // 
@@ -150,14 +151,26 @@
             this.textBoxTone.TabIndex = 7;
             this.textBoxTone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxTone_KeyDown);
             // 
+            // checkBoxR
+            // 
+            this.checkBoxR.AutoSize = true;
+            this.checkBoxR.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.checkBoxR.Location = new System.Drawing.Point(249, 162);
+            this.checkBoxR.Name = "checkBoxR";
+            this.checkBoxR.Size = new System.Drawing.Size(100, 24);
+            this.checkBoxR.TabIndex = 8;
+            this.checkBoxR.Text = "Romantic";
+            this.checkBoxR.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 198);
+            this.Controls.Add(this.checkBoxR);
             this.Controls.Add(this.textBoxTone);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.nPinyinR);
+            this.Controls.Add(this.msIntPinyinRBox);
+            this.Controls.Add(this.nPinyinRBox);
             this.Controls.Add(this.listBoxTone);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.buttonSave);
@@ -179,10 +192,11 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.ListBox listBoxTone;
-        private System.Windows.Forms.RadioButton nPinyinR;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton nPinyinRBox;
+        private System.Windows.Forms.RadioButton msIntPinyinRBox;
         private System.ComponentModel.BackgroundWorker SaveBackgroundWorker;
         private System.Windows.Forms.TextBox textBoxTone;
+        private System.Windows.Forms.CheckBox checkBoxR;
     }
 }
 

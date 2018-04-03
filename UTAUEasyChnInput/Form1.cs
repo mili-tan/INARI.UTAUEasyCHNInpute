@@ -10,6 +10,7 @@ using IniParser.Model;
 using Microsoft.International.Converters.PinYinConverter;
 using System.Drawing;
 using NPinyin;
+using Helper;
 
 namespace UTAUEasyChnInput
 {
@@ -78,13 +79,13 @@ namespace UTAUEasyChnInput
 
             foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
             {
-                if (nPinyinR.Checked)
+                if (nPinyinRBox.Checked)
                 {
-                    listBoxWord.Items.Add(Regex.Replace(Pinyin.GetPinyin(itemWords), @"\d", "").ToLower());
+                    listBoxWord.Items.Add(ToPinyin.ByNPingyin(itemWords));
                 }
                 else
                 {
-                    listBoxWord.Items.Add(Regex.Replace(new ChineseChar(itemWords).Pinyins[0].ToString(), @"\d", "").ToLower());
+                    listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWords));
                 }
             }
 
@@ -143,7 +144,6 @@ namespace UTAUEasyChnInput
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             SaveBackgroundWorker.RunWorkerAsync();
-
         }
 
         private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -179,6 +179,37 @@ namespace UTAUEasyChnInput
                 listBoxWord.Items[listBoxWord.SelectedIndex] = textBoxTone.Text;
                 textBoxTone.Clear();
             }
+        }
+
+        private string[] ToPinyinR(string str)
+        {
+            Entity.PinyinDictionary dict = new Entity.PinyinDictionary();
+            List<string> wordList = dict.Dictionary.Keys.ToList<string>();
+            List<string> wordsLeft = Segmentation.SegMMLeftToRight(str, ref wordList); //进行正向分词
+
+            if (wordsLeft == null)
+            {
+                MessageBox.Show("意外的错误 分词失败");
+                return null;
+            }
+
+            var pinyinList = new List<string>();
+            foreach (string word in wordsLeft)
+            {
+                string pinyin = "";
+                if (word.Length == 1 && !dict.Dictionary.ContainsKey(word))
+                {
+                    pinyin = ToPinyin.ByMSIntPinyin(word.ToCharArray()[0]);
+                }
+                else
+                {
+                    pinyin = dict.Dictionary[word].ToLower();
+                }
+                pinyin = Regex.Replace(pinyin, @"\d", "");
+
+                pinyinList.Add(pinyin);
+            }
+            return pinyinList.ToArray();
         }
     }
 }
