@@ -77,22 +77,24 @@ namespace UTAUEasyChnInput
             textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, "\\p{P}", "");
             textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, @"[A-Za-z0-9]", "");
 
-            foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
-            {
-                if (nPinyinRBox.Checked)
-                {
-                    listBoxWord.Items.Add(ToPinyin.ByNPingyin(itemWords));
-                }
-                else
-                {
-                    listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWords));
-                }
-            }
-
             if (checkBoxR.Checked)
             {
                 listBoxWord.Items.Clear();
                 listBoxWord.Items.AddRange(ToPinyinR(textBoxLyrics.Text));
+            }
+            else
+            {
+                foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
+                {
+                    if (nPinyinRBox.Checked)
+                    {
+                        listBoxWord.Items.Add(ToPinyin.ByNPingyin(itemWords));
+                    }
+                    else
+                    {
+                        listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWords));
+                    }
+                }
             }
 
         }

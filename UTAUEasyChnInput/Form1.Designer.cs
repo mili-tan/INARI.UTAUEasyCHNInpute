@@ -108,6 +108,7 @@
             // 
             this.nPinyinRBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nPinyinRBox.AutoSize = true;
+            this.nPinyinRBox.Checked = true;
             this.nPinyinRBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.nPinyinRBox.Location = new System.Drawing.Point(142, 161);
             this.nPinyinRBox.Name = "nPinyinRBox";
@@ -122,13 +123,11 @@
             this.msIntPinyinRBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.msIntPinyinRBox.AutoSize = true;
             this.msIntPinyinRBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.msIntPinyinRBox.Checked = true;
             this.msIntPinyinRBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.msIntPinyinRBox.Location = new System.Drawing.Point(405, 161);
             this.msIntPinyinRBox.Name = "msIntPinyinRBox";
             this.msIntPinyinRBox.Size = new System.Drawing.Size(116, 24);
             this.msIntPinyinRBox.TabIndex = 6;
-            this.msIntPinyinRBox.TabStop = true;
             this.msIntPinyinRBox.Text = "MSIntPinyin";
             this.msIntPinyinRBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.msIntPinyinRBox.UseVisualStyleBackColor = true;
@@ -154,12 +153,14 @@
             // checkBoxR
             // 
             this.checkBoxR.AutoSize = true;
+            this.checkBoxR.Checked = true;
+            this.checkBoxR.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxR.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.checkBoxR.Location = new System.Drawing.Point(233, 162);
             this.checkBoxR.Name = "checkBoxR";
-            this.checkBoxR.Size = new System.Drawing.Size(100, 24);
+            this.checkBoxR.Size = new System.Drawing.Size(106, 24);
             this.checkBoxR.TabIndex = 8;
-            this.checkBoxR.Text = "Romantic";
+            this.checkBoxR.Text = "多音字决策";
             this.checkBoxR.UseVisualStyleBackColor = true;
             // 
             // Form1
