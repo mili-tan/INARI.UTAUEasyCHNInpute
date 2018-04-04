@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Helper
+namespace UTAUEasyChnInput.Helper
 {
     // by Butaixianran
 

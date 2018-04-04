@@ -2,7 +2,7 @@
 using NPinyin;
 using System.Text.RegularExpressions;
 
-namespace Helper
+namespace UTAUEasyChnInput.Helper
 {
     public class ToPinyin
     {

@@ -9,8 +9,7 @@ using IniParser;
 using IniParser.Model;
 using Microsoft.International.Converters.PinYinConverter;
 using System.Drawing;
-using NPinyin;
-using Helper;
+using UTAUEasyChnInput.Helper;
 
 namespace UTAUEasyChnInput
 {
