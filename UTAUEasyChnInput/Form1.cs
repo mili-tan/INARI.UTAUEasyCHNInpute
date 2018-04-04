@@ -205,7 +205,15 @@ namespace UTAUEasyChnInput
             {
                 if (word.Length == 1 && !dict.Dictionary.ContainsKey(word))
                 {
-                    string pinyin = ToPinyin.ByMSIntPinyin(word.ToCharArray()[0]);
+                    string pinyin;
+                    if (nPinyinRBox.Checked)
+                    {
+                        pinyin = ToPinyin.ByNPingyin(word.ToCharArray()[0]);
+                    }
+                    else
+                    {
+                        pinyin = ToPinyin.ByMSIntPinyin(word.ToCharArray()[0]);
+                    }
                     pinyinList.Add(pinyin);
                 }
                 else
