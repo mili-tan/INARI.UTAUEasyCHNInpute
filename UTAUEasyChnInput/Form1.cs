@@ -192,7 +192,7 @@ namespace UTAUEasyChnInput
         {
             Entity.PinyinDictionary dict = new Entity.PinyinDictionary();
             List<string> wordList = dict.Dictionary.Keys.ToList<string>();
-            List<string> wordsLeft = Segmentation.SegMMLeftToRight(str, ref wordList); //进行正向分词
+            List<string> wordsLeft = Segmentation.SegMMDouble(str, ref wordList); //进行正向分词
 
             if (wordsLeft == null)
             {
