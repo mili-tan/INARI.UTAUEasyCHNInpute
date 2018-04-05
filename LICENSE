@@ -1,10 +1,11 @@
-
-UTAUEasyChnInput
+﻿UTAUEasyChnInput
 
 ----------
+
 MIT License
 
 Copyright (c) 2017-2018 Milkey Tan
+Copyright (c) 2017 Kerry Ng(伍 嘉綺)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +31,13 @@ Microsoft Visual Studio International Pack
 Microsoft.PinyinConverter
 
 https://www.microsoft.com/zh-cn/download/details.aspx?id=15251
+
+----------
+
+Helper.Segmentation
+By butaixianran
+
+https://github.com/butaixianran
 
 ----------
 
@@ -384,6 +392,7 @@ https://github.com/hgneng/ekho
 http://www.eguidedog.net/ekho.php
 
 ----------
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
