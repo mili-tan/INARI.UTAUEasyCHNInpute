@@ -70,28 +70,34 @@ namespace UTAUEasyChnInput
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
-            listBoxWord.Items.Clear();
-
-            textBoxLyrics.Text = RemoveFormat(textBoxLyrics.Text);
-
-            if (checkBoxDisV.Checked)
+            if (!string.IsNullOrWhiteSpace(textBoxLyrics.Text))
             {
                 listBoxWord.Items.Clear();
-                listBoxWord.Items.AddRange(ToPinyinDisV(textBoxLyrics.Text));
+                textBoxLyrics.Text = RemoveFormat(textBoxLyrics.Text);
+
+                if (checkBoxDisV.Checked)
+                {
+                    listBoxWord.Items.Clear();
+                    listBoxWord.Items.AddRange(ToPinyinDisV(textBoxLyrics.Text));
+                }
+                else
+                {
+                    foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
+                    {
+                        if (nPinyinRBox.Checked)
+                        {
+                            listBoxWord.Items.Add(ToPinyin.ByNPingyin(itemWords));
+                        }
+                        else
+                        {
+                            listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWords));
+                        }
+                    }
+                }
             }
             else
             {
-                foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
-                {
-                    if (nPinyinRBox.Checked)
-                    {
-                        listBoxWord.Items.Add(ToPinyin.ByNPingyin(itemWords));
-                    }
-                    else
-                    {
-                        listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWords));
-                    }
-                }
+                MessageBox.Show("歌词不能为空。");
             }
 
         }
@@ -177,11 +183,11 @@ namespace UTAUEasyChnInput
         {
             Entity.PinyinDictionary dict = new Entity.PinyinDictionary();
             List<string> wordList = dict.Dictionary.Keys.ToList<string>();
-            List<string> wordsLeft = Segmentation.SegMMDouble(str, ref wordList); //进行正向分词
+            List<string> wordsLeft = Segmentation.SegMMDouble(str, ref wordList);
 
             if (wordsLeft == null)
             {
-                MessageBox.Show("意外的错误 分词失败");
+                MessageBox.Show("意外的错误，分词失败。");
                 return null;
             }
 
