@@ -10,6 +10,7 @@ using IniParser.Model;
 using Microsoft.International.Converters.PinYinConverter;
 using System.Drawing;
 using UTAUEasyChnInput.Helper;
+using System.Runtime.InteropServices;
 
 namespace UTAUEasyChnInput
 {
@@ -21,6 +22,42 @@ namespace UTAUEasyChnInput
         public string savePath;
         private readonly Encoding EncodeJPN = Encoding.GetEncoding("Shift_JIS");
         private readonly string UstHeader = "[#VERSION]\r\n" + "UST Version 1.20\r\n";
+
+        internal enum AccentState
+        {
+            ACCENT_DISABLED = 0,
+            ACCENT_ENABLE_GRADIENT = 1,
+            ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
+            ACCENT_ENABLE_BLURBEHIND = 3,
+            ACCENT_INVALID_STATE = 4
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct AccentPolicy
+        {
+            public AccentState AccentState;
+            public int AccentFlags;
+            public int GradientColor;
+            public int AnimationId;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct WindowCompositionAttributeData
+        {
+            public WindowCompositionAttribute Attribute;
+            public IntPtr Data;
+            public int SizeOfData;
+        }
+
+        internal enum WindowCompositionAttribute
+        {
+            // ...
+            WCA_ACCENT_POLICY = 19
+            // ...
+        }
+
+        [DllImport("user32.dll")]
+        internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
 
         public Form1(string ustPath)
         {
@@ -66,6 +103,31 @@ namespace UTAUEasyChnInput
         private void Form1_Load(object sender, EventArgs e)
         {
             Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+
+            ////////////
+            var accent = new  AccentPolicy();
+            accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
+
+            var accentStructSize = Marshal.SizeOf(accent);
+
+            var accentPtr = Marshal.AllocHGlobal(accentStructSize);
+            Marshal.StructureToPtr(accent, accentPtr, false);
+
+            var data = new WindowCompositionAttributeData
+            {
+                Attribute = WindowCompositionAttribute.WCA_ACCENT_POLICY,
+                SizeOfData = accentStructSize,
+                Data = accentPtr
+            };
+
+            SetWindowCompositionAttribute(Handle, ref data);
+
+            Marshal.FreeHGlobal(accentPtr);
+            ////////////
+
+            TransparencyKey = Color.WhiteSmoke;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)

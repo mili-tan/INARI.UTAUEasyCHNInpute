@@ -69,25 +69,27 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSave.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonSave.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.buttonSave.Location = new System.Drawing.Point(12, 159);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(124, 28);
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "应用";
-            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonOK.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.buttonOK.Location = new System.Drawing.Point(526, 159);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(122, 28);
             this.buttonOK.TabIndex = 3;
             this.buttonOK.Text = "确定";
-            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.UseVisualStyleBackColor = false;
             this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
             // 
             // listBoxTone
@@ -108,6 +110,7 @@
             // 
             this.nPinyinRBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nPinyinRBox.AutoSize = true;
+            this.nPinyinRBox.BackColor = System.Drawing.Color.Transparent;
             this.nPinyinRBox.Checked = true;
             this.nPinyinRBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.nPinyinRBox.Location = new System.Drawing.Point(142, 161);
@@ -116,12 +119,13 @@
             this.nPinyinRBox.TabIndex = 5;
             this.nPinyinRBox.TabStop = true;
             this.nPinyinRBox.Text = "NPinyin";
-            this.nPinyinRBox.UseVisualStyleBackColor = true;
+            this.nPinyinRBox.UseVisualStyleBackColor = false;
             // 
             // msIntPinyinRBox
             // 
             this.msIntPinyinRBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.msIntPinyinRBox.AutoSize = true;
+            this.msIntPinyinRBox.BackColor = System.Drawing.Color.Transparent;
             this.msIntPinyinRBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.msIntPinyinRBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.msIntPinyinRBox.Location = new System.Drawing.Point(405, 161);
@@ -130,7 +134,7 @@
             this.msIntPinyinRBox.TabIndex = 6;
             this.msIntPinyinRBox.Text = "MSIntPinyin";
             this.msIntPinyinRBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.msIntPinyinRBox.UseVisualStyleBackColor = true;
+            this.msIntPinyinRBox.UseVisualStyleBackColor = false;
             // 
             // SaveBackgroundWorker
             // 
@@ -152,7 +156,9 @@
             // 
             // checkBoxDisV
             // 
+            this.checkBoxDisV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxDisV.AutoSize = true;
+            this.checkBoxDisV.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxDisV.Checked = true;
             this.checkBoxDisV.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDisV.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
@@ -161,13 +167,14 @@
             this.checkBoxDisV.Size = new System.Drawing.Size(106, 24);
             this.checkBoxDisV.TabIndex = 8;
             this.checkBoxDisV.Text = "多音字决策";
-            this.checkBoxDisV.UseVisualStyleBackColor = true;
+            this.checkBoxDisV.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(657, 198);
             this.Controls.Add(this.checkBoxDisV);
             this.Controls.Add(this.textBoxTone);
@@ -178,9 +185,13 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxLyrics);
             this.Controls.Add(this.listBoxWord);
+            this.ForeColor = System.Drawing.Color.Black;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UTAUEasyChnInput";
+            this.TransparencyKey = System.Drawing.Color.DimGray;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
