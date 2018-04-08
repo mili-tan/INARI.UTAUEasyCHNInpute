@@ -23,7 +23,7 @@ namespace UTAUEasyChnInput
         private readonly Encoding EncodeJPN = Encoding.GetEncoding("Shift_JIS");
         private readonly string UstHeader = "[#VERSION]\r\n" + "UST Version 1.20\r\n";
 
-        internal enum AccentState
+        private enum AccentState
         {
             ACCENT_DISABLED = 0,
             ACCENT_ENABLE_GRADIENT = 1,
@@ -33,7 +33,7 @@ namespace UTAUEasyChnInput
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        internal struct AccentPolicy
+        private struct AccentPolicy
         {
             public AccentState AccentState;
             public int AccentFlags;
@@ -42,22 +42,20 @@ namespace UTAUEasyChnInput
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        internal struct WindowCompositionAttributeData
+        private struct WindowCompositionAttributeData
         {
             public WindowCompositionAttribute Attribute;
             public IntPtr Data;
             public int SizeOfData;
         }
 
-        internal enum WindowCompositionAttribute
+        private enum WindowCompositionAttribute
         {
-            // ...
             WCA_ACCENT_POLICY = 19
-            // ...
         }
 
         [DllImport("user32.dll")]
-        internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+        private static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
 
         public Form1(string ustPath)
         {
@@ -78,7 +76,7 @@ namespace UTAUEasyChnInput
                 StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(1).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count -1;
 
-                Text = "起始点：" + StartPoint + " 音符数：" + PointCount;
+                textBoxCount.Text = " 音符数：" + PointCount+" ";
 
                 List<string> lyricWordList = new List<string>();
                 for (int i = 0; i < PointCount; i++)
@@ -103,13 +101,11 @@ namespace UTAUEasyChnInput
         private void Form1_Load(object sender, EventArgs e)
         {
             Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-
+            
             ////////////
             var accent = new  AccentPolicy();
             accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
-
             var accentStructSize = Marshal.SizeOf(accent);
-
             var accentPtr = Marshal.AllocHGlobal(accentStructSize);
             Marshal.StructureToPtr(accent, accentPtr, false);
 
@@ -123,11 +119,10 @@ namespace UTAUEasyChnInput
             SetWindowCompositionAttribute(Handle, ref data);
 
             Marshal.FreeHGlobal(accentPtr);
+            TransparencyKey = Color.WhiteSmoke;
+            //SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             ////////////
 
-            TransparencyKey = Color.WhiteSmoke;
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
