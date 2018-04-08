@@ -37,7 +37,7 @@
             this.msIntPinyinRBox = new System.Windows.Forms.RadioButton();
             this.SaveBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.textBoxTone = new System.Windows.Forms.TextBox();
-            this.checkBoxR = new System.Windows.Forms.CheckBox();
+            this.checkBoxDisV = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // listBoxWord
@@ -150,25 +150,25 @@
             this.textBoxTone.TabIndex = 7;
             this.textBoxTone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxTone_KeyDown);
             // 
-            // checkBoxR
+            // checkBoxDisV
             // 
-            this.checkBoxR.AutoSize = true;
-            this.checkBoxR.Checked = true;
-            this.checkBoxR.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxR.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.checkBoxR.Location = new System.Drawing.Point(233, 162);
-            this.checkBoxR.Name = "checkBoxR";
-            this.checkBoxR.Size = new System.Drawing.Size(106, 24);
-            this.checkBoxR.TabIndex = 8;
-            this.checkBoxR.Text = "多音字决策";
-            this.checkBoxR.UseVisualStyleBackColor = true;
+            this.checkBoxDisV.AutoSize = true;
+            this.checkBoxDisV.Checked = true;
+            this.checkBoxDisV.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxDisV.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.checkBoxDisV.Location = new System.Drawing.Point(233, 162);
+            this.checkBoxDisV.Name = "checkBoxDisV";
+            this.checkBoxDisV.Size = new System.Drawing.Size(106, 24);
+            this.checkBoxDisV.TabIndex = 8;
+            this.checkBoxDisV.Text = "多音字决策";
+            this.checkBoxDisV.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 198);
-            this.Controls.Add(this.checkBoxR);
+            this.Controls.Add(this.checkBoxDisV);
             this.Controls.Add(this.textBoxTone);
             this.Controls.Add(this.msIntPinyinRBox);
             this.Controls.Add(this.nPinyinRBox);
@@ -197,7 +197,7 @@
         private System.Windows.Forms.RadioButton msIntPinyinRBox;
         private System.ComponentModel.BackgroundWorker SaveBackgroundWorker;
         private System.Windows.Forms.TextBox textBoxTone;
-        private System.Windows.Forms.CheckBox checkBoxR;
+        private System.Windows.Forms.CheckBox checkBoxDisV;
     }
 }
 

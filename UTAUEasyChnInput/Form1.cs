@@ -52,9 +52,9 @@ namespace UTAUEasyChnInput
                 }
                 listBoxWord.Items.AddRange(lyricWordList.ToArray());
             }
-            catch (Exception msg)
+            catch (Exception e)
             {
-                MessageBox.Show(msg.Message);
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -72,14 +72,12 @@ namespace UTAUEasyChnInput
         {
             listBoxWord.Items.Clear();
 
-            textBoxLyrics.Text = textBoxLyrics.Text.Replace(" ","");
-            textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, "\\p{P}", "");
-            textBoxLyrics.Text = Regex.Replace(textBoxLyrics.Text, @"[A-Za-z0-9]", "");
+            textBoxLyrics.Text = RemoveFormat(textBoxLyrics.Text);
 
-            if (checkBoxR.Checked)
+            if (checkBoxDisV.Checked)
             {
                 listBoxWord.Items.Clear();
-                listBoxWord.Items.AddRange(ToPinyinR(textBoxLyrics.Text));
+                listBoxWord.Items.AddRange(ToPinyinDisV(textBoxLyrics.Text));
             }
             else
             {
@@ -123,26 +121,6 @@ namespace UTAUEasyChnInput
             }
         }
 
-        private static void RemoveNullElement<T>(List<T> list)
-        {
-            int count = list.Count;
-            for (int i = 0; i < count; i++)
-                if (list[i] == null)
-                {
-                    int newCount = i++;
-
-                    for (; i < count; i++)
-                    {
-                        if (list[i] != null)
-                        {
-                            list[newCount++] = list[i];
-                        }
-                    }
-                    list.RemoveRange(newCount, count - newCount);
-                    break;
-                }
-        }
-
         private void ListBoxTone_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             listBoxWord.Items[listBoxWord.SelectedIndex] = Regex.Replace(listBoxTone.SelectedItem.ToString(), @"\d", "").ToLower();
@@ -150,7 +128,14 @@ namespace UTAUEasyChnInput
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            SaveBackgroundWorker.RunWorkerAsync();
+            if (listBoxWord.Items.Count != 0 && listBoxWord.Items.Count == PointCount)
+            {
+                SaveBackgroundWorker.RunWorkerAsync();
+            }
+            else
+            {
+                MessageBox.Show("填词音符数不正确。");
+            }
         }
 
         private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -188,7 +173,7 @@ namespace UTAUEasyChnInput
             }
         }
 
-        private string[] ToPinyinR(string str)
+        private string[] ToPinyinDisV(string str)
         {
             Entity.PinyinDictionary dict = new Entity.PinyinDictionary();
             List<string> wordList = dict.Dictionary.Keys.ToList<string>();
@@ -222,6 +207,34 @@ namespace UTAUEasyChnInput
                 }
             }
             return pinyinList.ToArray();
+        }
+
+        private static void RemoveNullElement<T>(List<T> list)
+        {
+            int count = list.Count;
+            for (int i = 0; i < count; i++)
+                if (list[i] == null)
+                {
+                    int newCount = i++;
+
+                    for (; i < count; i++)
+                    {
+                        if (list[i] != null)
+                        {
+                            list[newCount++] = list[i];
+                        }
+                    }
+                    list.RemoveRange(newCount, count - newCount);
+                    break;
+                }
+        }
+
+        private string RemoveFormat(string str)
+        {
+            str = str.Replace(" ", "");
+            str = Regex.Replace(str, "\\p{P}", "");
+            str = Regex.Replace(str, @"[A-Za-z0-9]", "");
+            return str;
         }
     }
 }
