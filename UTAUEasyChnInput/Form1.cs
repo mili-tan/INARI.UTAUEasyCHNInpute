@@ -117,11 +117,19 @@ namespace UTAUEasyChnInput
             };
 
             SetWindowCompositionAttribute(Handle, ref data);
-
             Marshal.FreeHGlobal(accentPtr);
-            TransparencyKey = Color.WhiteSmoke;
+
+            if (Environment.OSVersion.Version.Major < 10)
+            {
+                TransparencyKey = Color.Olive;
+            }else
+            {
+                TransparencyKey = Color.WhiteSmoke;
+            }
+            
             //SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             ////////////
+
 
         }
 
