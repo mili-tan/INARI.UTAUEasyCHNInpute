@@ -174,14 +174,15 @@
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxCount.Enabled = false;
             this.textBoxCount.Font = new System.Drawing.Font("Microsoft YaHei UI", 7F);
             this.textBoxCount.Location = new System.Drawing.Point(13, 9);
             this.textBoxCount.Name = "textBoxCount";
+            this.textBoxCount.ReadOnly = true;
             this.textBoxCount.Size = new System.Drawing.Size(123, 22);
             this.textBoxCount.TabIndex = 9;
+            this.textBoxCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCount.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxCount_MouseDoubleClick);
             // 
             // Form1
             // 

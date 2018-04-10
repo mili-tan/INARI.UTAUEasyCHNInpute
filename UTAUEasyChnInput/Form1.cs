@@ -161,26 +161,29 @@ namespace UTAUEasyChnInput
 
         private void ListBoxWord_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var myLyricsChars = textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", "").ToCharArray();
-            string myLyricsWordStr = myLyricsChars[listBoxWord.SelectedIndex].ToString();
-
-            textBoxTone.Enabled = true;
-
-            if (new ChineseChar(Convert.ToChar(myLyricsWordStr)).IsPolyphone)
+            if (!string.IsNullOrWhiteSpace(textBoxLyrics.Text))
             {
-                listBoxTone.Enabled = true;
+                var myLyricsChars = textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", "").ToCharArray();
+                string myLyricsWordStr = myLyricsChars[listBoxWord.SelectedIndex].ToString();
 
-                var pinyinListR = new ChineseChar(Convert.ToChar(myLyricsWordStr)).Pinyins;
-                var pinyinList = new List<string>(pinyinListR);
+                textBoxTone.Enabled = true;
 
-                RemoveNullElement(pinyinList);
+                if (new ChineseChar(Convert.ToChar(myLyricsWordStr)).IsPolyphone)
+                {
+                    listBoxTone.Enabled = true;
 
-                listBoxTone.Items.Clear();
-                listBoxTone.Items.AddRange(pinyinList.ToArray());
-            }
-            else
-            {
-                MessageBox.Show("这不是一个多音字");
+                    var pinyinListR = new ChineseChar(Convert.ToChar(myLyricsWordStr)).Pinyins;
+                    var pinyinList = new List<string>(pinyinListR);
+
+                    RemoveNullElement(pinyinList);
+
+                    listBoxTone.Items.Clear();
+                    listBoxTone.Items.AddRange(pinyinList.ToArray());
+                }
+                else
+                {
+                    MessageBox.Show("这不是一个多音字");
+                }
             }
         }
 
@@ -298,6 +301,12 @@ namespace UTAUEasyChnInput
             str = Regex.Replace(str, "\\p{P}", "");
             str = Regex.Replace(str, @"[A-Za-z0-9]", "");
             return str;
+        }
+
+        private void TextBoxCount_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Width = (int)(Width * 1.2);
+            Height = (int)(Height * 1.2);
         }
     }
 }
