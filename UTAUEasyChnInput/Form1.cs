@@ -101,22 +101,23 @@ namespace UTAUEasyChnInput
         private void Form1_Load(object sender, EventArgs e)
         {
             Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-            
-            ////////////
-            var accent = new  AccentPolicy();
-            accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
-            var accentStructSize = Marshal.SizeOf(accent);
-            var accentPtr = Marshal.AllocHGlobal(accentStructSize);
-            Marshal.StructureToPtr(accent, accentPtr, false);
 
-            var data = new WindowCompositionAttributeData
+            var accentPolicy = new AccentPolicy
+            {
+                AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND
+            };
+            var accentStructSize = Marshal.SizeOf(accentPolicy);
+            var accentPtr = Marshal.AllocHGlobal(accentStructSize);
+            Marshal.StructureToPtr(accentPolicy, accentPtr, false);
+
+            var dataWindows = new WindowCompositionAttributeData
             {
                 Attribute = WindowCompositionAttribute.WCA_ACCENT_POLICY,
                 SizeOfData = accentStructSize,
                 Data = accentPtr
             };
 
-            SetWindowCompositionAttribute(Handle, ref data);
+            SetWindowCompositionAttribute(Handle, ref dataWindows);
             Marshal.FreeHGlobal(accentPtr);
 
             if (Environment.OSVersion.Version.Major < 10)
@@ -127,10 +128,6 @@ namespace UTAUEasyChnInput
                 TransparencyKey = Color.WhiteSmoke;
             }
             
-            //SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            ////////////
-
-
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
