@@ -182,7 +182,6 @@
             this.textBoxCount.Size = new System.Drawing.Size(123, 22);
             this.textBoxCount.TabIndex = 9;
             this.textBoxCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxCount.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxCount_MouseDoubleClick);
             // 
             // Form1
             // 

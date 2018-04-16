@@ -136,25 +136,28 @@ namespace UTAUEasyChnInput
             {
                 listBoxWord.Items.Clear();
                 textBoxLyrics.Text = RemoveFormat(textBoxLyrics.Text);
-
-                if (checkBoxDisV.Checked)
+                string[] sentence = textBoxLyrics.Text.Split('|');
+                foreach (var itemSen in sentence)
                 {
-                    listBoxWord.Items.Clear();
-                    listBoxWord.Items.AddRange(ToPinyinDisV(textBoxLyrics.Text));
-                }
-                else
-                {
-                    foreach (char itemWords in textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
+                    if (checkBoxDisV.Checked)
                     {
-                        if (nPinyinRBox.Checked)
+                        listBoxWord.Items.AddRange(ToPinyinDisV(itemSen));
+                    }
+                    else
+                    {
+                        foreach (char itemWord in itemSen.Replace("\n", "").Replace("\r", "").Replace(" ", ""))
                         {
-                            listBoxWord.Items.Add(ToPinyin.ByNPingyin(itemWords));
-                        }
-                        else
-                        {
-                            listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWords));
+                            if (nPinyinRBox.Checked)
+                            {
+                                listBoxWord.Items.Add(ToPinyin.ByNPingyin(itemWord));
+                            }
+                            else
+                            {
+                                listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWord));
+                            }
                         }
                     }
+
                 }
             }
             else
@@ -168,7 +171,7 @@ namespace UTAUEasyChnInput
         {
             if (!string.IsNullOrWhiteSpace(textBoxLyrics.Text))
             {
-                var myLyricsChars = textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", "").ToCharArray();
+                var myLyricsChars = textBoxLyrics.Text.Replace("\n", "").Replace("\r", "").Replace(" ", "").Replace("|","").ToCharArray();
                 string myLyricsWordStr = myLyricsChars[listBoxWord.SelectedIndex].ToString();
 
                 textBoxTone.Enabled = true;
@@ -187,7 +190,7 @@ namespace UTAUEasyChnInput
                 }
                 else
                 {
-                    MessageBox.Show("这不是一个多音字");
+                    MessageBox.Show("这不是一个多音字。");
                 }
             }
         }
@@ -303,15 +306,12 @@ namespace UTAUEasyChnInput
         private string RemoveFormat(string str)
         {
             str = str.Replace(" ", "");
+            str = str.Replace("，", "|");
+            str = str.Replace("。", "|");
             str = Regex.Replace(str, "\\p{P}", "");
             str = Regex.Replace(str, @"[A-Za-z0-9]", "");
             return str;
         }
 
-        private void TextBoxCount_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Width = (int)(Width * 1.2);
-            Height = (int)(Height * 1.2);
-        }
     }
 }
