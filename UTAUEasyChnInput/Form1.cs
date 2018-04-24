@@ -11,13 +11,17 @@ using Microsoft.International.Converters.PinYinConverter;
 using System.Drawing;
 using UTAUEasyChnInput.Helper;
 using System.Runtime.InteropServices;
+// ReSharper disable InconsistentNaming
+// ReSharper disable CoVariantArrayConversion
+// ReSharper disable FieldCanBeMadeReadOnly.Global
+// ReSharper disable FieldCanBeMadeReadOnly.Local
 
 namespace UTAUEasyChnInput
 {
     public partial class Form1 : Form
     {
-        public int StartPoint = 0;
-        public int PointCount = 0;
+        private int StartPoint;
+        private int PointCount;
         public IniData UstData;
         public string savePath;
         private readonly Encoding EncodeJPN = Encoding.GetEncoding("Shift_JIS");
@@ -25,20 +29,16 @@ namespace UTAUEasyChnInput
 
         private enum AccentState
         {
-            ACCENT_DISABLED = 0,
-            ACCENT_ENABLE_GRADIENT = 1,
-            ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
-            ACCENT_ENABLE_BLURBEHIND = 3,
-            ACCENT_INVALID_STATE = 4
+            ACCENT_ENABLE_BLURBEHIND = 3
         }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct AccentPolicy
         {
             public AccentState AccentState;
-            public int AccentFlags;
-            public int GradientColor;
-            public int AnimationId;
+            private int AccentFlags;
+            private int GradientColor;
+            private int AnimationId;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -76,7 +76,7 @@ namespace UTAUEasyChnInput
                 StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(1).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count -1;
 
-                textBoxCount.Text = " 音符数：" + PointCount+" ";
+                textBoxCount.Text = @" 音符数：" + PointCount;
 
                 List<string> lyricWordList = new List<string>();
                 for (int i = 0; i < PointCount; i++)
@@ -85,6 +85,7 @@ namespace UTAUEasyChnInput
                     
                     lyricWordList.Add(UstData["#" + pointNum.ToString("0000")]["Lyric"]);
                 }
+                // ReSharper disable once CoVariantArrayConversion
                 listBoxWord.Items.AddRange(lyricWordList.ToArray());
             }
             catch (Exception e)
@@ -153,7 +154,7 @@ namespace UTAUEasyChnInput
                             }
                             else
                             {
-                                listBoxWord.Items.Add(ToPinyin.ByMSIntPinyin(itemWord));
+                                listBoxWord.Items.Add(ToPinyin.ByMsIntPinyin(itemWord));
                             }
                         }
                     }
@@ -162,7 +163,7 @@ namespace UTAUEasyChnInput
             }
             else
             {
-                MessageBox.Show("歌词不能为空。");
+                MessageBox.Show(@"歌词不能为空。");
             }
 
         }
@@ -186,11 +187,11 @@ namespace UTAUEasyChnInput
                     RemoveNullElement(pinyinList);
 
                     listBoxTone.Items.Clear();
-                    listBoxTone.Items.AddRange(pinyinList.ToArray());
+                    listBoxTone.Items.AddRange(items: pinyinList.ToArray());
                 }
                 else
                 {
-                    MessageBox.Show("这不是一个多音字。");
+                    MessageBox.Show(@"这不是一个多音字。");
                 }
             }
         }
@@ -208,7 +209,7 @@ namespace UTAUEasyChnInput
             }
             else
             {
-                MessageBox.Show("填词音符数不正确。");
+                MessageBox.Show(@"填词音符数不正确。");
             }
         }
 
@@ -234,7 +235,7 @@ namespace UTAUEasyChnInput
 
         private void SaveBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show("OK!");
+            MessageBox.Show(@"OK!");
             Close();
         }
 
@@ -250,12 +251,12 @@ namespace UTAUEasyChnInput
         private string[] ToPinyinDisV(string str)
         {
             Entity.PinyinDictionary dict = new Entity.PinyinDictionary();
-            List<string> wordList = dict.Dictionary.Keys.ToList<string>();
+            List<string> wordList = dict.Dictionary.Keys.ToList();
             List<string> wordsLeft = Segmentation.SegMMDouble(str, ref wordList);
 
             if (wordsLeft == null)
             {
-                MessageBox.Show("意外的错误，分词失败。");
+                MessageBox.Show(@"意外的错误，分词失败。");
                 return null;
             }
 
@@ -271,7 +272,7 @@ namespace UTAUEasyChnInput
                     }
                     else
                     {
-                        pinyin = ToPinyin.ByMSIntPinyin(word.ToCharArray()[0]);
+                        pinyin = ToPinyin.ByMsIntPinyin(word.ToCharArray()[0]);
                     }
                     pinyinList.Add(pinyin);
                 }
