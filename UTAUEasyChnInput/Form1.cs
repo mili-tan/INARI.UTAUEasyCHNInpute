@@ -76,17 +76,25 @@ namespace UTAUEasyChnInput
                 StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(1).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count -1;
 
-                textBoxCount.Text = @" 音符数：" + PointCount;
-
+                int ignoreRNum = 0;
                 List<string> lyricWordList = new List<string>();
                 for (int i = 0; i < PointCount; i++)
                 {
                     int pointNum = i + StartPoint;
+                    if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
+                    {
+                        ignoreRNum += 1;
+                    }
+                    else
+                    {
+                        lyricWordList.Add(UstData["#" + pointNum.ToString("0000")]["Lyric"]);
+                    }
                     
-                    lyricWordList.Add(UstData["#" + pointNum.ToString("0000")]["Lyric"]);
                 }
+
                 // ReSharper disable once CoVariantArrayConversion
                 listBoxWord.Items.AddRange(lyricWordList.ToArray());
+                textBoxCount.Text = @" 音符数：" + (PointCount - ignoreRNum);
             }
             catch (Exception e)
             {
@@ -227,7 +235,14 @@ namespace UTAUEasyChnInput
                 for (int i = 0; i < PointCount; i++)
                 {
                     int pointNum = i + StartPoint;
-                    UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
+                    if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
+                    {
+                        UstData["#" + pointNum.ToString("0000")]["Lyric"] = "R";
+                    }
+                    else
+                    {
+                        UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
+                    }
                 }
 
                 File.WriteAllText(savePath, UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
