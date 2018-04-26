@@ -24,10 +24,17 @@ namespace UTAUEasyChnInput
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                MessageBox.Show("没有包含应有的参数，请作为UTAU插件使用");
+                MessageBox.Show(@"没有包含应有的参数，请作为UTAU插件使用");
                 if (File.Exists("test"))
                 {
-                    Application.Run(new Form1());
+                    if (File.Exists("tmp.tmp"))
+                    {
+                        Application.Run(new Form1("tmp.tmp"));
+                    }
+                    else
+                    {
+                        Application.Run(new Form1());
+                    }
                 }
 
             }

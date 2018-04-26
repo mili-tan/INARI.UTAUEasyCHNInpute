@@ -20,8 +20,9 @@ namespace UTAUEasyChnInput
 {
     public partial class Form1 : Form
     {
-        private int StartPoint;
         private int PointCount;
+        private int ignoreRNum;
+
         public IniData UstData;
         public string savePath;
         private readonly Encoding EncodeJPN = Encoding.GetEncoding("Shift_JIS");
@@ -72,15 +73,15 @@ namespace UTAUEasyChnInput
 
                 UstData.Sections.RemoveSection("#PREV");
                 UstData.Sections.RemoveSection("#NEXT");
+                UstData.Sections.RemoveSection("#SETTING");
 
-                StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(1).SectionName.Replace("#", ""));
-                PointCount = UstData.Sections.Count -1;
+                var startPoint = Convert.ToInt32(UstData.Sections.ElementAt(0).SectionName.Replace("#", ""));
+                PointCount = UstData.Sections.Count;
 
-                int ignoreRNum = 0;
                 List<string> lyricWordList = new List<string>();
                 for (int i = 0; i < PointCount; i++)
                 {
-                    int pointNum = i + StartPoint;
+                    int pointNum = i + startPoint;
                     if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
                     {
                         ignoreRNum += 1;
@@ -218,7 +219,7 @@ namespace UTAUEasyChnInput
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (listBoxWord.Items.Count != 0 && listBoxWord.Items.Count == PointCount)
+            if (listBoxWord.Items.Count != 0 && listBoxWord.Items.Count == (PointCount - ignoreRNum))
             {
                 SaveBackgroundWorker.RunWorkerAsync();
             }
@@ -230,28 +231,31 @@ namespace UTAUEasyChnInput
 
         private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            try
+            //try
+            //{
+
+            int listIndex = 0;
+            foreach (var itemSection in UstData.Sections)
             {
-                for (int i = 0; i < PointCount; i++)
+                if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
                 {
-                    int pointNum = i + StartPoint;
-                    if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
-                    {
-                        UstData["#" + pointNum.ToString("0000")]["Lyric"] = "R";
-                    }
-                    else
-                    {
-                        UstData["#" + pointNum.ToString("0000")]["Lyric"] = listBoxWord.Items[i].ToString();
-                    }
+                    //ignoreRNum += 1;
+                }
+                else
+                {
+                    itemSection.Keys["Lyric"] = listBoxWord.Items[listIndex].ToString();
+                    listIndex++;
                 }
 
-                File.WriteAllText(savePath, UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
             }
 
-            catch (Exception msg)
-            {
-                MessageBox.Show(msg.Message);
-            }
+                File.WriteAllText(savePath, UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
+            //}
+
+            //catch (Exception msg)
+            //{
+            //    MessageBox.Show(msg.Message);
+            //}
 
         }
 
