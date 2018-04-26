@@ -95,7 +95,12 @@ namespace UTAUEasyChnInput
 
                 // ReSharper disable once CoVariantArrayConversion
                 listBoxWord.Items.AddRange(lyricWordList.ToArray());
-                textBoxCount.Text = @" 音符数：" + (PointCount - ignoreRNum);
+                textBoxCount.Text = @" 音符数:" + (PointCount - ignoreRNum);
+
+                if (File.Exists("ignoreR.enable"))
+                {
+                    textBoxCount.Text += @"|忽视R";
+                }
             }
             catch (Exception e)
             {
@@ -231,31 +236,31 @@ namespace UTAUEasyChnInput
 
         private void SaveBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            //try
-            //{
-
-            int listIndex = 0;
-            foreach (var itemSection in UstData.Sections)
+            try
             {
-                if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
+
+                int listIndex = 0;
+                foreach (var itemSection in UstData.Sections)
                 {
-                    //ignoreRNum += 1;
-                }
-                else
-                {
-                    itemSection.Keys["Lyric"] = listBoxWord.Items[listIndex].ToString();
-                    listIndex++;
+                    if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
+                    {
+                        //ignoreRNum += 1;
+                    }
+                    else
+                    {
+                        itemSection.Keys["Lyric"] = listBoxWord.Items[listIndex].ToString();
+                        listIndex++;
+                    }
                 }
 
+                File.WriteAllText(savePath,
+                    UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
             }
 
-                File.WriteAllText(savePath, UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
-            //}
-
-            //catch (Exception msg)
-            //{
-            //    MessageBox.Show(msg.Message);
-            //}
+            catch (Exception msg)
+            {
+                MessageBox.Show(msg.Message);
+            }
 
         }
 
