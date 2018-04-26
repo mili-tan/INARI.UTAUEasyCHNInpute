@@ -121,14 +121,21 @@ namespace UTAUEasyChnInput
             SetWindowCompositionAttribute(Handle, ref dataWindows);
             Marshal.FreeHGlobal(accentPtr);
 
-            if (Environment.OSVersion.Version.Major < 10)
+            if (Environment.OSVersion.Version.Major < 10 || File.Exists("blur.Disable"))
             {
                 TransparencyKey = Color.Olive;
             }else
             {
                 TransparencyKey = Color.WhiteSmoke;
             }
-            
+
+            if (File.Exists("auto.Disable"))
+            {
+                checkBoxDisV.Show();
+                nPinyinRBox.Show();
+                msIntPinyinRBox.Show();
+                checkBoxDisV.Checked = false;
+            }
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)

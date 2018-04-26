@@ -129,6 +129,7 @@
             this.nPinyinRBox.TabStop = true;
             this.nPinyinRBox.Text = "NPinyin";
             this.nPinyinRBox.UseVisualStyleBackColor = false;
+            this.nPinyinRBox.Visible = false;
             // 
             // msIntPinyinRBox
             // 
@@ -144,6 +145,7 @@
             this.msIntPinyinRBox.Text = "MSIntPinyin";
             this.msIntPinyinRBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.msIntPinyinRBox.UseVisualStyleBackColor = false;
+            this.msIntPinyinRBox.Visible = false;
             // 
             // textBoxTone
             // 
@@ -171,6 +173,7 @@
             this.checkBoxDisV.TabIndex = 8;
             this.checkBoxDisV.Text = "多音字决策";
             this.checkBoxDisV.UseVisualStyleBackColor = false;
+            this.checkBoxDisV.Visible = false;
             // 
             // textBoxCount
             // 
