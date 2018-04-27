@@ -75,22 +75,33 @@ namespace UTAUEasyChnInput
                 UstData.Sections.RemoveSection("#NEXT");
                 UstData.Sections.RemoveSection("#SETTING");
 
-                var startPoint = Convert.ToInt32(UstData.Sections.ElementAt(0).SectionName.Replace("#", ""));
+                //int startPoint = Convert.ToInt32(UstData.Sections.ElementAt(0).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count;
-
                 List<string> lyricWordList = new List<string>();
-                for (int i = 0; i < PointCount; i++)
+
+                //for (int i = 0; i < PointCount; i++)
+                //{
+                //    int pointNum = i + startPoint;
+                //    if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
+                //    {
+                //        ignoreRNum += 1;
+                //    }
+                //    else
+                //    {
+                //        lyricWordList.Add(UstData["#" + pointNum.ToString("0000")]["Lyric"]);
+                //    }
+                //}
+
+                foreach (var itemSection in UstData.Sections)
                 {
-                    int pointNum = i + startPoint;
-                    if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
+                    if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
                     {
                         ignoreRNum += 1;
                     }
                     else
                     {
-                        lyricWordList.Add(UstData["#" + pointNum.ToString("0000")]["Lyric"]);
+                        lyricWordList.Add(itemSection.Keys["Lyric"]);
                     }
-                    
                 }
 
                 // ReSharper disable once CoVariantArrayConversion
@@ -244,7 +255,7 @@ namespace UTAUEasyChnInput
                 {
                     if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
                     {
-                        //ignoreRNum += 1;
+                        //
                     }
                     else
                     {
@@ -335,7 +346,7 @@ namespace UTAUEasyChnInput
                 }
         }
 
-        private string RemoveFormat(string str)
+        private static string RemoveFormat(string str)
         {
             str = str.Replace(" ", "");
             str = str.Replace("，", "|");
