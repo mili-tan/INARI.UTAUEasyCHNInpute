@@ -15,7 +15,7 @@ namespace UTAUEasyChnInput.Helper
         /// <param name="leftToRight">true为从左到右分词，false为从右到左分词</param>
         /// <param name="maxLength">每个分词的最大长度</param>
         /// <returns>储存了分词结果的字符串数组</returns>
-        public static List<string> SegMM(string inputStr, ref List<string> wordList, bool leftToRight, int maxLength)
+        public static List<string> SegMm(string inputStr, ref List<string> wordList, bool leftToRight, int maxLength)
         {
             if (wordList == null)
                 return null;
@@ -89,9 +89,9 @@ namespace UTAUEasyChnInput.Helper
         /// <param name="wordList">词典</param>
         /// <param name="leftToRight">true为从左到右分词，false为从右到左分词</param>
         /// <returns>储存了分词结果的字符串数组</returns>
-        public static List<string> SegMM(string inputStr, ref List<string> wordList, bool leftToRight)
+        public static List<string> SegMm(string inputStr, ref List<string> wordList, bool leftToRight)
         {
-            return SegMM(inputStr, ref wordList, leftToRight, 7);
+            return SegMm(inputStr, ref wordList, leftToRight, 7);
         }
 
         /// <summary>
@@ -101,9 +101,9 @@ namespace UTAUEasyChnInput.Helper
         /// <param name="inputStr">要进行分词的字符串</param>
         /// <param name="wordList">词典</param>
         /// <returns>储存了分词结果的字符串数组</returns>
-        public static List<string> SegMMLeftToRight(string inputStr, ref List<string> wordList)
+        public static List<string> SegMmLeftToRight(string inputStr, ref List<string> wordList)
         {
-            return SegMM(inputStr, ref wordList, true, 7);
+            return SegMm(inputStr, ref wordList, true, 7);
         }
 
         /// <summary>
@@ -113,9 +113,9 @@ namespace UTAUEasyChnInput.Helper
         /// <param name="inputStr">要进行分词的字符串</param>
         /// <param name="wordList">词典</param>
         /// <returns>储存了分词结果的字符串数组</returns>
-        public static List<string> SegMMRightToLeft(string inputStr, ref List<string> wordList)
+        public static List<string> SegMmRightToLeft(string inputStr, ref List<string> wordList)
         {
-            return SegMM(inputStr, ref wordList, false, 7);
+            return SegMm(inputStr, ref wordList, false, 7);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace UTAUEasyChnInput.Helper
         /// <param name="inputStr">要进行分词的字符串</param>
         /// <param name="wordList">词典</param>
         /// <returns>储存了分词结果的字符串数组</returns>
-        public static List<string> SegMMDouble(string inputStr, ref List<string> wordList)
+        public static List<string> SegMmDouble(string inputStr, ref List<string> wordList)
         {
             List<string> segWordsLeftToRight = new List<string>();
             List<string> segWordsRightToLeft = new List<string>();
@@ -163,8 +163,8 @@ namespace UTAUEasyChnInput.Helper
             List<string> wordsFromRight = new List<string>();
             List<string> wordsAtMiddle = new List<string>();
 
-            segWordsLeftToRight = SegMMLeftToRight(inputStr, ref wordList);
-            segWordsRightToLeft = SegMMRightToLeft(inputStr, ref wordList);
+            segWordsLeftToRight = SegMmLeftToRight(inputStr, ref wordList);
+            segWordsRightToLeft = SegMmRightToLeft(inputStr, ref wordList);
 
             while ((segWordsLeftToRight[0].Length + segWordsRightToLeft[segWordsRightToLeft.Count - 1].Length) < inputStr.Length)
             {
@@ -223,8 +223,8 @@ namespace UTAUEasyChnInput.Helper
                 segWordsLeftToRight.Clear();
                 segWordsRightToLeft.Clear();
 
-                segWordsLeftToRight = SegMMLeftToRight(inputStr, ref wordList);
-                segWordsRightToLeft = SegMMRightToLeft(inputStr, ref wordList);
+                segWordsLeftToRight = SegMmLeftToRight(inputStr, ref wordList);
+                segWordsRightToLeft = SegMmRightToLeft(inputStr, ref wordList);
 
             }
 

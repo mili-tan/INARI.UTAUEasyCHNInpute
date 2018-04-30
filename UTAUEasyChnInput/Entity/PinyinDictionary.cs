@@ -5,10 +5,10 @@ namespace Entity
 {
     class PinyinDictionary
     {
-        private Dictionary<string, string> dictionary;
+        private Dictionary<string, string> _dictionary;
         public Dictionary<string, string> Dictionary
         {
-            get { return dictionary; }
+            get { return _dictionary; }
         }
 
         public PinyinDictionary() : this("Dictionary.xml")
@@ -16,7 +16,7 @@ namespace Entity
 
         public PinyinDictionary(string fileName)
         {
-            dictionary = new Dictionary<string, string>();
+            _dictionary = new Dictionary<string, string>();
 
             string cn = "";
             string pinyin = "";
@@ -39,7 +39,7 @@ namespace Entity
                                 {
                                     if (!string.IsNullOrEmpty(cn) && !string.IsNullOrEmpty(pinyin))
                                     {
-                                        dictionary.Add(cn, pinyin);
+                                        _dictionary.Add(cn, pinyin);
                                         cn = "";
                                         pinyin = "";
                                     }
@@ -57,14 +57,14 @@ namespace Entity
             if (string.IsNullOrEmpty(cn))
                 return null;
 
-            if (dictionary == null)
+            if (_dictionary == null)
                 return null;
 
-            if (dictionary.Count == 0)
+            if (_dictionary.Count == 0)
                 return null;
 
-            if (dictionary.ContainsKey(cn))
-                return dictionary[cn];
+            if (_dictionary.ContainsKey(cn))
+                return _dictionary[cn];
 
             else
                 return null;
@@ -75,18 +75,18 @@ namespace Entity
             if (string.IsNullOrEmpty(cn))
                 return null;
 
-            if (dictionary == null)
+            if (_dictionary == null)
                 return null;
 
-            if (dictionary.Count == 0)
+            if (_dictionary.Count == 0)
                 return null;
 
-            if (!dictionary.ContainsKey(cn))
+            if (!_dictionary.ContainsKey(cn))
                 return null;
 
             Dictionary<char, string> cnCharPinyin = new Dictionary<char, string>();
 
-            string[] pinyins = dictionary[cn].Split(' ');
+            string[] pinyins = _dictionary[cn].Split(' ');
             char[] cnChars = cn.ToCharArray();
 
             for (int i = 0; i < cn.Length; i++)

@@ -11,26 +11,22 @@ using Microsoft.International.Converters.PinYinConverter;
 using System.Drawing;
 using UTAUEasyChnInput.Helper;
 using System.Runtime.InteropServices;
-// ReSharper disable InconsistentNaming
-// ReSharper disable CoVariantArrayConversion
-// ReSharper disable FieldCanBeMadeReadOnly.Global
-// ReSharper disable FieldCanBeMadeReadOnly.Local
 
 namespace UTAUEasyChnInput
 {
     public partial class Form1 : Form
     {
         private int PointCount;
-        private int ignoreRNum;
+        private int IgnoreRNum;
 
         public IniData UstData;
-        public string savePath;
+        public string SavePath;
         private readonly Encoding EncodeJPN = Encoding.GetEncoding("Shift_JIS");
         private readonly string UstHeader = "[#VERSION]\r\n" + "UST Version 1.20\r\n";
 
         private enum AccentState
         {
-            ACCENT_ENABLE_BLURBEHIND = 3
+            AccentEnableBlurbehind = 3
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -52,7 +48,7 @@ namespace UTAUEasyChnInput
 
         private enum WindowCompositionAttribute
         {
-            WCA_ACCENT_POLICY = 19
+            WcaAccentPolicy = 19
         }
 
         [DllImport("user32.dll")]
@@ -61,7 +57,7 @@ namespace UTAUEasyChnInput
         public Form1(string ustPath)
         {
             InitializeComponent();
-            savePath = ustPath;
+            SavePath = ustPath;
 
             try
             {
@@ -75,7 +71,7 @@ namespace UTAUEasyChnInput
                 UstData.Sections.RemoveSection("#NEXT");
                 UstData.Sections.RemoveSection("#SETTING");
 
-                //int startPoint = Convert.ToInt32(UstData.Sections.ElementAt(0).SectionName.Replace("#", ""));
+                //int StartPoint = Convert.ToInt32(UstData.Sections.ElementAt(0).SectionName.Replace("#", ""));
                 PointCount = UstData.Sections.Count;
                 List<string> lyricWordList = new List<string>();
 
@@ -84,11 +80,11 @@ namespace UTAUEasyChnInput
                 //    int pointNum = i + startPoint;
                 //    if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
                 //    {
-                //        ignoreRNum += 1;
+                //        IgnoreRNum += 1;
                 //    }
                 //    else
                 //    {
-                //        lyricWordList.Add(UstData["#" + pointNum.ToString("0000")]["Lyric"]);
+                //        lyricWordList.Add(UstData["#" + PointNum.ToString("0000")]["Lyric"]);
                 //    }
                 //}
 
@@ -96,7 +92,7 @@ namespace UTAUEasyChnInput
                 {
                     if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
                     {
-                        ignoreRNum += 1;
+                        IgnoreRNum += 1;
                     }
                     else
                     {
@@ -104,9 +100,8 @@ namespace UTAUEasyChnInput
                     }
                 }
 
-                // ReSharper disable once CoVariantArrayConversion
                 listBoxWord.Items.AddRange(lyricWordList.ToArray());
-                textBoxCount.Text = @" 音符数:" + (PointCount - ignoreRNum);
+                textBoxCount.Text = @" 音符数:" + (PointCount - IgnoreRNum);
 
                 if (File.Exists("ignoreR.enable"))
                 {
@@ -130,7 +125,7 @@ namespace UTAUEasyChnInput
 
             var accentPolicy = new AccentPolicy
             {
-                AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND
+                AccentState = AccentState.AccentEnableBlurbehind
             };
             var accentStructSize = Marshal.SizeOf(accentPolicy);
             var accentPtr = Marshal.AllocHGlobal(accentStructSize);
@@ -138,7 +133,7 @@ namespace UTAUEasyChnInput
 
             var dataWindows = new WindowCompositionAttributeData
             {
-                Attribute = WindowCompositionAttribute.WCA_ACCENT_POLICY,
+                Attribute = WindowCompositionAttribute.WcaAccentPolicy,
                 SizeOfData = accentStructSize,
                 Data = accentPtr
             };
@@ -235,7 +230,7 @@ namespace UTAUEasyChnInput
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (listBoxWord.Items.Count != 0 && listBoxWord.Items.Count == (PointCount - ignoreRNum))
+            if (listBoxWord.Items.Count != 0 && listBoxWord.Items.Count == (PointCount - IgnoreRNum))
             {
                 SaveBackgroundWorker.RunWorkerAsync();
             }
@@ -249,13 +244,12 @@ namespace UTAUEasyChnInput
         {
             try
             {
-
                 int listIndex = 0;
                 foreach (var itemSection in UstData.Sections)
                 {
                     if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
                     {
-                        //
+                        
                     }
                     else
                     {
@@ -264,7 +258,7 @@ namespace UTAUEasyChnInput
                     }
                 }
 
-                File.WriteAllText(savePath,
+                File.WriteAllText(SavePath,
                     UstHeader + UstData.ToString().Replace(" = ", "=").Replace("\r\n\r\n", "\r\n"));
             }
 
@@ -294,7 +288,7 @@ namespace UTAUEasyChnInput
         {
             Entity.PinyinDictionary dict = new Entity.PinyinDictionary();
             List<string> wordList = dict.Dictionary.Keys.ToList();
-            List<string> wordsLeft = Segmentation.SegMMDouble(str, ref wordList);
+            List<string> wordsLeft = Segmentation.SegMmDouble(str, ref wordList);
 
             if (wordsLeft == null)
             {
