@@ -11,6 +11,7 @@ using Microsoft.International.Converters.PinYinConverter;
 using System.Drawing;
 using UTAUEasyChnInput.Helper;
 using System.Runtime.InteropServices;
+using Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter;
 
 namespace UTAUEasyChnInput
 {
@@ -163,6 +164,7 @@ namespace UTAUEasyChnInput
             if (!string.IsNullOrWhiteSpace(textBoxLyrics.Text))
             {
                 listBoxWord.Items.Clear();
+                textBoxLyrics.Text = ChineseConverter.Convert(textBoxLyrics.Text, ChineseConversionDirection.TraditionalToSimplified);
                 textBoxLyrics.Text = RemoveFormat(textBoxLyrics.Text);
                 string[] sentence = textBoxLyrics.Text.Split('|');
                 foreach (var itemSen in sentence)
