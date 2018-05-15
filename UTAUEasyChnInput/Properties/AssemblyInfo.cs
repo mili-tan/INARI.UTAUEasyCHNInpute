@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("UTAUEasyChnInput")]
+[assembly: AssemblyTitle("UTAU Easy Chinese Input")]
 [assembly: AssemblyDescription("更好用的UTAU中文填词工具。")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("INARI Soft")]

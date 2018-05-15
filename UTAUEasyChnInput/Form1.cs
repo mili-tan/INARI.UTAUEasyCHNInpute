@@ -76,19 +76,6 @@ namespace UTAUEasyChnInput
                 PointCount = UstData.Sections.Count;
                 List<string> lyricWordList = new List<string>();
 
-                //for (int i = 0; i < PointCount; i++)
-                //{
-                //    int pointNum = i + startPoint;
-                //    if (UstData["#" + pointNum.ToString("0000")]["Lyric"] == "R" && File.Exists("ignoreR.enable"))
-                //    {
-                //        IgnoreRNum += 1;
-                //    }
-                //    else
-                //    {
-                //        lyricWordList.Add(UstData["#" + PointNum.ToString("0000")]["Lyric"]);
-                //    }
-                //}
-
                 foreach (var itemSection in UstData.Sections)
                 {
                     if (itemSection.Keys["Lyric"] == "R" && File.Exists("ignoreR.enable"))
